@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,11 +11,9 @@ import { RegistroComponent } from './pagina/registro/registro.component';
 import { AdminComponent } from './pagina/admin/admin.component';
 import { GestionaMedicosComponent } from './pagina/admin/gestiona-medicos/gestiona-medicos.component';
 import { HistorialConsultasComponent } from './pagina/admin/historial-consultas/historial-consultas.component';
-import { ResponderPQRSComponent } from './pagina/admin/responder-pqrs/responder-pqrs.component';
 import { PacienteComponent } from './pagina/paciente/paciente.component';
 import { AgendarComponent } from './pagina/paciente/agendar/agendar.component';
 import { CancelarCitaComponent } from './pagina/paciente/cancelar-cita/cancelar-cita.component';
-import { CrearPQRSComponent} from './pagina/paciente/crear-pqrs/crear-pqrs.component';
 import { RecuperarPasswdComponent} from './pagina/paciente/recuperar-passwd/recuperar-passwd.component';
 import { MedicoComponent } from './pagina/medico/medico.component';
 import { AtenderCitaComponent } from './pagina/medico/atender-cita/atender-cita.component';
@@ -23,6 +22,13 @@ import { EditarComponent } from './pagina/editar/editar.component';
 import { EliminarCuentaComponent } from './pagina/eliminar-cuenta/eliminar-cuenta.component';
 import { CrearMedicoComponent } from './pagina/admin/gestiona-medicos/crear-medico/crear-medico.component';
 import { HistorialPacienteComponent } from './pagina/historial-paciente/historial-paciente.component';
+import { GestionPqrsComponent } from './pagina/gestion-pqrs/gestion-pqrs.component';
+import { CrearPqrsComponent } from './pagina/crear-pqrs/crear-pqrs.component';
+import { DetallePqrsComponent } from './pagina/detalle-pqrs/detalle-pqrs.component';
+import { GestionCitasComponent } from './pagina/gestion-citas/gestion-citas.component';
+import { AgendarCitaComponent } from './pagina/agendar-cita/agendar-cita.component';
+import { DetalleCitaComponent } from './pagina/detalle-cita/detalle-cita.component';
+import { AlertaComponent } from './pagina/alerta/alerta.component';
 
 @NgModule({
   declarations: [
@@ -33,11 +39,9 @@ import { HistorialPacienteComponent } from './pagina/historial-paciente/historia
     AdminComponent,
     GestionaMedicosComponent,
     HistorialConsultasComponent,
-    ResponderPQRSComponent,
     PacienteComponent,
     AgendarComponent,
     CancelarCitaComponent,
-    CrearPQRSComponent,
     RecuperarPasswdComponent,
     MedicoComponent,
     AtenderCitaComponent,
@@ -45,9 +49,17 @@ import { HistorialPacienteComponent } from './pagina/historial-paciente/historia
     EditarComponent,
     EliminarCuentaComponent,
     CrearMedicoComponent,
-    HistorialPacienteComponent
+    HistorialPacienteComponent,
+    GestionPqrsComponent,
+    CrearPqrsComponent,
+    DetallePqrsComponent,
+    GestionCitasComponent,
+    AgendarCitaComponent,
+    DetalleCitaComponent,
+    AlertaComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule

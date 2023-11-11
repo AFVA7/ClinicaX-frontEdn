@@ -4,7 +4,7 @@
             paciente</h5>
     </div>
     <div class="card-body p-5">
-        <form #f="ngForm" (ngSubmit)="registrar()">
+        <form #f="ngForm">
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Cédula: </label>
                 <div class="col-sm-10">
@@ -31,9 +31,14 @@
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label">Imagen: </label>
-                <div class="col-sm-10">
-                    <input type="file" name="urlFoto" class="form-control" required (change)="onFileChange($event)" />
+                <label class="col-sm-2 col-form-label">Foto: </label>
+                <div class="col-sm-8">
+                    <input type="file" class="form-control" name="foto" required (change)="onFileChange($event)" />
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" [disabled]="archivos == null" class="btn btn-primary" (click)="subirImagen()">
+                        <i class="fa-solid fa-cloud-arrow-up me-2"></i>Subir Foto
+                    </button>
                 </div>
             </div>
             <!-- listo para replicar -->
@@ -76,7 +81,8 @@
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Tipo de sangre: </label>
                 <div class="col-sm-10">
-                    <select name="tipo de sangre" required class="form-select" [(ngModel)]="registroPacienteDTO.tipoSangre">
+                    <select name="tipo de sangre" required class="form-select"
+                        [(ngModel)]="registroPacienteDTO.tipoSangre">
                         <option value="" selected>Seleccione la Tipo de Sangre</option>
                         <option [value]="item" *ngFor="let item of tipoSangre; index as i">{{item}}</option>
                     </select>
@@ -112,9 +118,10 @@
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="!sonIguales()">Las contraseñas no
                     coinciden</div>
-                <button class="btn btn-primary" type="submit" [disabled]="f.invalid || !sonIguales()">
+                <button class="btn btn-primary" type="submit" [disabled]="f.invalid || !sonIguales()" (click)="registrar()" >
                     <i class="fa-solid fa-circle-plus me-1"></i>Registrarse
                 </button>
+                <app-alerta [alerta]="alerta"></app-alerta>
             </div>
         </form>
     </div>
