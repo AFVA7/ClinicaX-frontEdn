@@ -18,7 +18,6 @@ import { RecuperarPasswdComponent} from './pagina/paciente/recuperar-passwd/recu
 import { MedicoComponent } from './pagina/medico/medico.component';
 import { AtenderCitaComponent } from './pagina/medico/atender-cita/atender-cita.component';
 import { DiaLibreComponent } from './pagina/medico/dia-libre/dia-libre.component';
-import { EditarComponent } from './pagina/editar/editar.component';
 import { EliminarCuentaComponent } from './pagina/eliminar-cuenta/eliminar-cuenta.component';
 import { CrearMedicoComponent } from './pagina/admin/gestiona-medicos/crear-medico/crear-medico.component';
 import { HistorialPacienteComponent } from './pagina/historial-paciente/historial-paciente.component';
@@ -51,7 +50,6 @@ import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasen
     MedicoComponent,
     AtenderCitaComponent,
     DiaLibreComponent,
-    EditarComponent,
     EliminarCuentaComponent,
     CrearMedicoComponent,
     HistorialPacienteComponent,

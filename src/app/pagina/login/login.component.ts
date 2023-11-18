@@ -19,7 +19,6 @@ export class LoginComponent {
   public login() {
     this.authService.login(this.loginDTO).subscribe({
       next: data => {
-        console.log(data)
         this.tokenService.login(data.respuesta.token, data.respuesta.refreshToken);
       },
       error: error => {

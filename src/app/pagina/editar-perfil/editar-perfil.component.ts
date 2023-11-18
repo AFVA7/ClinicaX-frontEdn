@@ -7,7 +7,6 @@ import { PacienteService } from 'src/app/servicios/paciente.service';
 import { TokenService } from 'src/app/servicios/token.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
-import { Token } from '@angular/compiler';
 import { TokenDTO } from 'src/app/modelo/token-dto';
 
 @Component({
@@ -32,7 +31,6 @@ export class EditarPerfilComponent {
     this.cargarEps();
     this.tipoSangre = [];
     this.cargarTipoSangre();
-
     this.obtenerDatosPaciente();
   }
 
@@ -49,7 +47,6 @@ export class EditarPerfilComponent {
       }
 
     });
-
   }
 
   public editarPerfil() {
