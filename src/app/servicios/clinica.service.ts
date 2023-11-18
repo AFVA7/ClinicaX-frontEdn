@@ -24,4 +24,7 @@ export class ClinicaService {
   public listarEPS(): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.clinicaURL}/lista-eps`);
   }
+  public listarMedicos(): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.clinicaURL}/listar-medicos`);
+  }
 }

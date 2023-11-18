@@ -4,6 +4,7 @@ import { RegistroPacienteDTO } from '../modelo/registro-paciente-dto';
 import { Observable, catchError, throwError } from 'rxjs';
 import { MensajeDTO } from '../modelo/mensaje-dto';
 import { LoginDTO } from '../modelo/login-dto';
+import { TokenDTO } from '../modelo/token-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,20 @@ export class AuthService {
         return throwError(error);
       })
     );
+  }
+
+  public refresh(tokenDTO: TokenDTO): Observable<MensajeDTO>{
+    const response = this.http.post<MensajeDTO>(`${this.authURL}/refresh`, tokenDTO);
+    return response.pipe(
+      catchError(error => {
+        console.error('Error en la solicitud:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  recuperarContrasena(email: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.authURL}/recuperar-passwd/${email}`);
   }
 }
 

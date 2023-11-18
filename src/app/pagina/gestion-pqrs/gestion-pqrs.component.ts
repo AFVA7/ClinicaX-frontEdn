@@ -13,6 +13,8 @@ import { Alerta } from 'src/app/modelo/alerta';
 export class GestionPqrsComponent {
   pqrs: ItemPQRSDTO[];
   alerta!: Alerta;
+  mostrarResponderPqrs: boolean = false;
+  pqrsCodigo: number = 0;
   constructor(private pacienteService: PacienteService, private tokenService: TokenService, private pqrsService: PqrsService) {
     this.pqrs = [];
     this.obtenerPqrs();
@@ -30,5 +32,13 @@ export class GestionPqrsComponent {
         this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
       }
     });
+  }
+
+  responderPQRS(codigo: number) {
+    this.mostrarResponderPqrs = true;
+    this.pqrsCodigo = codigo;
+  }
+  cerrarFormularioRespuesta() {
+    this.mostrarResponderPqrs = false;
   }
 }

@@ -7,14 +7,42 @@
         <span class="fs-4 ms-3 me-3">{{title}}</span>
       </a>
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        
         <li><a routerLink="" class="nav-link px-2 text-white">Inicio</a></li>
-        <li><a routerLink="" class="nav-link px-2 text-white">Gestión médicos</a></li>
-        <li><a routerLink="/gestion-pqrs" class="nav-link px-2 text-white">Gestión PQRS</a></li>
-        <li><a routerLink="/gestion-citas" class="nav-link px-2 text-white">Gestión Citas</a></li>
+        <li *ngIf="isLogged && rol.includes('ADMIN')" class="nav-item dropdown">
+          <a routerLink="/gestion-medicos" class="nav-link dropdown-toggle text-white" href="#" id="gestionMedicosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Gestión médicos
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="gestionMedicosDropdown">
+            <li><a routerLink="/crear-medico" class="dropdown-item">Crear Médico</a></li>
+            <li><a routerLink="/editar-medico" class="dropdown-item">Editar Médico</a></li>
+            <li><a routerLink="/eliminar-medico" class="dropdown-item">Eliminar Médico</a></li>
+            <li><a routerLink="/buscar-medico" class="dropdown-item">Buscar Médico</a></li>
+          </ul>
+        </li>
+        <li *ngIf="isLogged && rol.includes('PACIENTE') || rol.includes('ADMIN')"><a routerLink="/gestion-pqrs" class="nav-link px-2 text-white">Gestión PQRS</a></li>
+        <li *ngIf="isLogged && rol.includes('PACIENTE')"><a routerLink="/gestion-citas" class="nav-link px-2 text-white">Gestión Citas</a></li>
+        <li *ngIf="isLogged && rol.includes('PACIENTE')"><a routerLink="/editar-perfil" class="nav-link px-2 text-white">Editar Perfil</a></li>
+        <li *ngIf="isLogged && rol.includes('PACIENTE')"><a routerLink="" class="nav-link px-2 text-white">Historial medico</a></li>
+        <li *ngIf="isLogged && rol.includes('ADMIN')"><a routerLink="" class="nav-link px-2 text-white">Historial de consultas</a></li>
+        <li *ngIf="isLogged && rol.includes('MEDICO')"><a routerLink="" class="nav-link px-2 text-white">Citas pendientes</a></li>
+        <li *ngIf="isLogged && rol.includes('MEDICO')"><a routerLink="" class="nav-link px-2 text-white">Registrar día Libre</a></li>
+        <li *ngIf="isLogged && rol.includes('MEDICO')"><a routerLink="" class="nav-link px-2 text-white">Historial de atenciones</a></li>
       </ul>
       <div class="text-end">
-        <button type="button" routerLink="/login" class="btn btn-outline-light me-2">Login</button>
-        <button type="button" routerLink="/registro" class="btn btn-success">Sign-up</button>
+        <div *ngIf="!isLogged; then nologged else logged"></div>
+        <ng-template #nologged>
+          <div class="text-end">
+            <button type="button" routerLink="/login" class="btn btn-outline-light me-2">Login</button>
+            <button type="button" routerLink="/registro" class="btn btn-warning">Sign-up</button>
+          </div>
+        </ng-template>
+        <ng-template #logged>
+          <div class="text-end">
+            <label class="me-3">Hola {{email}}</label>
+            <button type="button" (click)="logout()" class="btn btn-warning">Logout</button>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

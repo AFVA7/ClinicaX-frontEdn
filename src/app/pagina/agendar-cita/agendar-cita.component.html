@@ -10,10 +10,11 @@
                     <select name="tipo" required class="form-select" [(ngModel)]="agendarCitaDTO.idMedico">
 
                         <option value="" selected>Seleccione un Medico</option>
-                        <option value="Zayra">Zayra</option>
+                        <!-- <option value="Zayra">Zayra</option>
                         <option value="Hidalgo">Hidalgo</option>
                         <option value="Andres">Andres</option>
-                        <option value="Fernando">Fernando</option>
+                        <option value="Fernando">Fernando</option> -->
+                                <option [value]="item" *ngFor="let item of medicos; index as i">{{item}}</option>
                     </select>
                 </div>
             </div>

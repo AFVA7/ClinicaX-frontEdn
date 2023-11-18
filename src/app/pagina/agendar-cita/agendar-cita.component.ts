@@ -11,9 +11,12 @@ import { ClinicaService } from 'src/app/servicios/clinica.service';
 export class AgendarCitaComponent {
   agendarCitaDTO: AgendarCitaDTO;
   especialidades: string[];
+  medicos: string[];
 
   constructor(private citaService: CitaService, private clinicaService: ClinicaService) {
     this.especialidades = [];
+    this.medicos = [];
+    this.cargarMedicos();
     this.agendarCitaDTO = new AgendarCitaDTO();
     this.cargarEspecialidad();
     }
@@ -34,4 +37,18 @@ export class AgendarCitaComponent {
       });
     }
 
+    private cargarMedicos() {
+      this.clinicaService.listarMedicos().subscribe({
+        next: data => {
+          this.medicos = data.respuesta.map((medico: {nombre: string}) => medico.nombre);
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
+    }
+
 }
+
+
+

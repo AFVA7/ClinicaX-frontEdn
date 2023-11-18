@@ -3,29 +3,84 @@ import { RouterModule, Routes } from '@angular/router';
 import { InicioComponent } from './pagina/inicio/inicio.component';
 import { LoginComponent } from './pagina/login/login.component';
 import { RegistroComponent } from './pagina/registro/registro.component';
-import { CrearMedicoComponent } from './pagina/admin/gestiona-medicos/crear-medico/crear-medico.component';
 import { GestionPqrsComponent } from './pagina/gestion-pqrs/gestion-pqrs.component';
 import { CrearPqrsComponent } from './pagina/crear-pqrs/crear-pqrs.component';
 import { DetallePqrsComponent } from './pagina/detalle-pqrs/detalle-pqrs.component';
 import { GestionCitasComponent } from './pagina/gestion-citas/gestion-citas.component';
 import { AgendarCitaComponent } from './pagina/agendar-cita/agendar-cita.component';
 import { DetalleCitaComponent } from './pagina/detalle-cita/detalle-cita.component';
+import { LoginGuard } from './guards/permiso.service';
+import { RolesGuard } from './guards/roles.service';
+import { AtencionCitaComponent } from './pagina/atencion-cita/atencion-cita.component';
+import { GestionaMedicosComponent } from './pagina/admin/gestiona-medicos/gestiona-medicos.component';
+import { EditarPerfilComponent } from './pagina/editar-perfil/editar-perfil.component';
+import { CrearMedicoComponent } from './pagina/admin/gestiona-medicos/crear-medico/crear-medico.component';
+import { ResponderPqrsComponent } from './pagina/gestion-pqrs/responder-pqrs/responder-pqrs.component';
+import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasena/olvidaste-contrasena.component';
 const routes: Routes = [
-{ path: "", component: InicioComponent },
-{ path: "login", component: LoginComponent },
-{ path: "registro", component: RegistroComponent },
-{ path: "detalle/:id", component: RegistroComponent },
-{ path: "crear-medico", component: CrearMedicoComponent },
-{ path: "gestion-pqrs", component: GestionPqrsComponent },
-{ path: "crear-pqrs", component: CrearPqrsComponent },
-{ path: "detalle-pqrs/:codigo", component: DetallePqrsComponent },
-{ path: "gestion-citas", component: GestionCitasComponent },
-{ path: "agendar-cita", component: AgendarCitaComponent },
-{ path: "detalle-cita/:codigo", component: DetalleCitaComponent },
-{ path: "**", pathMatch: "full", redirectTo: "" }
+    { path: "", component: InicioComponent },
+    { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
+    { path: "registro", component: RegistroComponent, canActivate: [LoginGuard] },
+    { path: "detalle/:id", component: RegistroComponent },
+    { path: "olvidaste-contrasena", component: OlvidasteContrasenaComponent },
+    {
+        path: "gestion-pqrs", component: GestionPqrsComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["PACIENTE", "ADMIN"]
+        }
+    },
+    {
+        path: "crear-pqrs", component: CrearPqrsComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["PACIENTE"]
+        }
+    },
+    {
+        path: "detalle-pqrs/:codigo", component: DetallePqrsComponent, canActivate: [RolesGuard],
+        data: { expectedRole: ["PACIENTE", "ADMIN"] }
+    },
+    {
+        path: "atender-cita", component: AtencionCitaComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["MEDICO"]
+        }
+    },
+    {
+        path: "gestion-medicos", component: GestionaMedicosComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["ADMIN"]
+        }
+    },
+    {
+        path: "gestion-citas", component: GestionCitasComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["PACIENTE"]
+        }
+    },
+    {
+        path: "agendar-cita", component: AgendarCitaComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["PACIENTE"]
+        }
+    },
+    {
+        path: "detalle-cita/:codigo", component: DetalleCitaComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["PACIENTE"]
+        }
+    },
+    {
+        path: "editar-perfil", component: EditarPerfilComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["PACIENTE"]
+        }
+    },
+    {
+        path: "crear-medico", component: CrearMedicoComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["ADMIN"]
+        }
+    },
+    {
+        path: "responder-pqrs", component: ResponderPqrsComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["ADMIN"]
+        }
+    },
+    { path: "**", pathMatch: "full", redirectTo: "" }
 ];
 @NgModule({
-imports: [RouterModule.forRoot(routes)],
-exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,0 +1,16 @@
+<div class="container mt-3">
+    <h2>Recuperar Contraseña</h2>
+  
+    <form (ngSubmit)="recuperarContrasena()" #f="ngForm">
+      <div class="mb-3">
+        <label for="email" class="form-label">Ingresa tu correo para enviarte un link mediante el cual podrás recuperar tu cuenta:</label>
+        <input type="email" name="email" [(ngModel)]="email" class="form-control" id="email" required>
+      </div>
+  
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Enviar Correo de Recuperación</button>
+      </div>
+    </form>
+    <app-alerta [alerta]="alerta"></app-alerta>
+  </div>
+  

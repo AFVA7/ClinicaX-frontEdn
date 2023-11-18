@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,6 +29,11 @@ import { GestionCitasComponent } from './pagina/gestion-citas/gestion-citas.comp
 import { AgendarCitaComponent } from './pagina/agendar-cita/agendar-cita.component';
 import { DetalleCitaComponent } from './pagina/detalle-cita/detalle-cita.component';
 import { AlertaComponent } from './pagina/alerta/alerta.component';
+import { AtencionCitaComponent } from './pagina/atencion-cita/atencion-cita.component';
+import { UsuarioInterceptor } from './interceptor/usuario.interceptor';
+import { EditarPerfilComponent } from './pagina/editar-perfil/editar-perfil.component';
+import { ResponderPqrsComponent } from './pagina/gestion-pqrs/responder-pqrs/responder-pqrs.component';
+import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasena/olvidaste-contrasena.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +61,11 @@ import { AlertaComponent } from './pagina/alerta/alerta.component';
     GestionCitasComponent,
     AgendarCitaComponent,
     DetalleCitaComponent,
-    AlertaComponent
+    AlertaComponent,
+    AtencionCitaComponent,
+    EditarPerfilComponent,
+    ResponderPqrsComponent,
+    OlvidasteContrasenaComponent
   ],
   imports: [
     HttpClientModule,
@@ -64,7 +73,9 @@ import { AlertaComponent } from './pagina/alerta/alerta.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: UsuarioInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

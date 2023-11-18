@@ -1,0 +1,12 @@
+<div>
+    <h3>Responder PQR</h3>
+    <form (ngSubmit)="responderPQR()" #f="ngForm">
+      <div class="mb-3">
+        <label for="respuesta">Respuesta:</label>
+        <textarea name="respuesta" [(ngModel)]="respuesta" class="form-control" id="respuesta" required></textarea>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Enviar respuesta</button>
+      </div>
+    </form>
+  </div>

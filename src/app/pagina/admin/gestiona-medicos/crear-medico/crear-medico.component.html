@@ -1,73 +1,129 @@
-<form #f="ngForm" (ngSubmit)="registrar()">
-    <div>
-        <label>Nombre: </label>
-        <input type="text" name="nombre" required maxlength="200" [(ngModel)]="registroMedicoDTO.nombre" />
+<div class="card">
+    <div class="card-header ps-5 pt-4 pb-4">
+        <h5 class="mb-0"><i class="fa-solid fa-user-plus me-3"></i>Registro de un nuevo
+            Medico</h5>
     </div>
-    <div>
-        <label>Cédula: </label>
-        <input type="text" name="cedula" required maxlength="10" [(ngModel)]="registroMedicoDTO.cedula" />
-    </div>
-    <div>
-        <label>Ciudad: </label>
-        <select name="ciudad" required [(ngModel)]="registroMedicoDTO.ciudad">
-            <option value="" selected>Seleccione una ciudad</option>
-            <option [value]="item" *ngFor="let item of ciudades; index as i">{{item}}</option>
-        </select>
-    </div>
-    <div>
-        <label>Especialidad: </label>
-        <select name="especialidad" required [(ngModel)]="registroMedicoDTO.especialidad">
-            <option value="" selected>Seleccione una especialidad</option>
-            <option [value]="item" *ngFor="let item of especialidades; index as i">{{item}}</option>
-        </select>
-    </div>
-    <div>
-        <label>Teléfono: </label>
-        <input type="text" name="telefono" required maxlength="20" [(ngModel)]="registroMedicoDTO.telefono" />
-    </div>
-    <div>
-        <label>Correo electrónico: </label>
-        <input type="email" name="correo" email required maxlength="80" [(ngModel)]="registroMedicoDTO.correo" />
-    </div>
-    <div>
-        <label>Contraseña: </label>
-        <input type="password" name="password" required [(ngModel)]="registroMedicoDTO.password" />
-    </div>
-    <div>
-        <label>Imagen: </label>
-        <input type="file" multiple required (change)="onFileChange($event)" />
-    </div>
-    <div>
-        <label>Repetir contraseña: </label>
-        <input type="password" name="confirmaPassword" required [(ngModel)]="registroMedicoDTO.confirmaPassword"
-            required />
-    </div>
-    <!-- aginar horarios al medico -->
-    <div>
-        <label>Horarios: </label>
-        <div *ngFor="let horario of horarios; index as i">
-            <div>
-                <label>Día: </label>
-                <select name="dia" required [(ngModel)]="horario.dia">
-                    <option value="" selected>Seleccione un día</option>
-                    <option [value]="item" *ngFor="let item of dias; index as i">{{item}}</option>
-                </select>
+    <div class="card-body p-5">
+        <form #f="ngForm">
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Foto: </label>
+                <div class="col-sm-8">
+                    <input type="file" class="form-control" name="foto" required (change)="onFileChange($event)" />
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" [disabled]="archivos == null" class="btn btn-primary" (click)="subirImagen()">
+                        <i class="fa-solid fa-cloud-arrow-up me-2"></i>Subir Foto
+                    </button>
+                </div>
             </div>
-            <div>
-                <label>Hora inicio: </label>
-                <input type="time" name="horaInicio" [(ngModel)]="horario.horaInicio" />
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Nombre: </label>
+                <div class="col-sm-10">
+                    <input #nombre="ngModel"
+                        [ngClass]="nombre.invalid && (nombre.dirty || nombre.touched) ? 'is-invalid' : ''" type="text"
+                        name="nombre" class="form-control" required [(ngModel)]="registroMedicoDTO.nombre" />
+                </div>
             </div>
-            <div>
-                <label>Hora fin: </label>
-                <input type="time" name="horaFin" [(ngModel)]="horario.horaFin" />
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Cédula: </label>
+                <div class="col-sm-10">
+                    <input #cedula="ngModel"
+                        [ngClass]="cedula.invalid && (cedula.dirty || cedula.touched) ? 'is-invalid' : ''" type="text"
+                        name="cedula" class="form-control" required [(ngModel)]="registroMedicoDTO.cedula" />
+                </div>
             </div>
-            <div>
-                <button type="button" (click)="eliminarHorario(i)">Eliminar horario</button>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Ciudad: </label>
+                <div class="col-sm-10">
+                    <select name="ciudad" required class="form-select" [(ngModel)]="registroMedicoDTO.ciudad">
+                        <option value="" selected>Seleccione una ciudad</option>
+                        <option [value]="item" *ngFor="let item of ciudades; index as i">{{item}}</option>
+                    </select>
+                </div>
             </div>
-        </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Especialidad: </label>
+                <div class="col-sm-10">
+                    <select name="especialidad" required class="form-select"
+                        [(ngModel)]="registroMedicoDTO.especialidad">
+                        <option value="" selected>Seleccione una especialidad</option>
+                        <option [value]="item" *ngFor="let item of especialidades; index as i">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Teléfono: </label>
+                <div class="col-sm-10">
+                    <input #telefono="ngModel"
+                        [ngClass]="telefono.invalid && (telefono.dirty || telefono.touched) ? 'is-invalid' : ''"
+                        type="text" name="telefono" class="form-control" required
+                        [(ngModel)]="registroMedicoDTO.telefono" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Correo electrónico: </label>
+                <div class="col-sm-10">
+                    <input #correo="ngModel"
+                        [ngClass]="correo.invalid && (correo.dirty || correo.touched) ? 'is-invalid' : ''" type="email"
+                        name="correo" class="form-control" required [(ngModel)]="registroMedicoDTO.correo" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Contraseña: </label>
+                <div class="col-sm-10">
+                    <input #passwd="ngModel"
+                        [ngClass]="passwd.invalid && (passwd.dirty || passwd.touched) ? 'is-invalid' : ''"
+                        type="password" name="passwd" class="form-control" required
+                        [(ngModel)]="registroMedicoDTO.password" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Repetir contraseña: </label>
+                <div class="col-sm-10">
+                    <input #confirmaPassword="ngModel"
+                        [ngClass]="confirmaPassword.invalid && (confirmaPassword.dirty || confirmaPassword.touched) ? 'is-invalid' : ''"
+                        type="password" name="confirmaPassword" class="form-control" required
+                        [(ngModel)]="registroMedicoDTO.confirmaPassword" />
+                </div>
+            </div>
+
+            <!-- Agregar horarios al medico -->
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Horarios: </label>
+                <div class="col-sm-10">
+                    <div *ngFor="let horario of registroMedicoDTO.horarios; let i = index" class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <select class="form-select" [(ngModel)]="horario.dia" name="dia_{{i}}" required>
+                                    <option value="" selected disabled>Seleccione un día</option>
+                                    <option [value]="item" *ngFor="let item of dias; index as i">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <input type="time" class="form-control" [(ngModel)]="horario.horaInicio" name="horaInicio_{{i}}" required>
+                            </div>
+                            <div class="col">
+                                <input type="time" class="form-control" [(ngModel)]="horario.horaFin" name="horaFin_{{i}}" required>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-danger" (click)="eliminarHorario(i)">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success" (click)="asignarHorario()">Agregar Horario</button>
+                </div>
+            </div>  
+
+
+            <div>
+                <div class="alert alert-danger" role="alert" *ngIf="!sonIguales()">Las contraseñas no
+                    coinciden</div>
+                <button class="btn btn-primary" type="submit" [disabled]="f.invalid || !sonIguales()"
+                    (click)="registrar()">
+                    <i class="fa-solid fa-circle-plus me-1"></i>Registrar
+                </button>
+                <app-alerta [alerta]="alerta"></app-alerta>
+            </div>
+        </form>
     </div>
-    <div>
-        <p *ngIf="!sonIguales()">Las contraseñas no coinciden</p>
-        <button type="submit" [disabled]="f.invalid || !sonIguales()">Registrarse</button>
-    </div>
-</form>
+</div>

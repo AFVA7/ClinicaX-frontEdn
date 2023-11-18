@@ -1,0 +1,146 @@
+<div class="card">
+    <div class="card-header ps-5 pt-4 pb-4">
+        <h5 class="mb-0"><i class="fa-solid fa-user-plus me-3"></i>Editar Perfil</h5>
+    </div>
+    <div class="card-body p-5">
+        <form #f="ngForm">
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Foto actual: </label>
+                <div class="col-sm-8 d-flex align-items-center">
+                    <img [src]="detallePacienteDTO.urlFoto" alt="Foto actual"
+                        class="img-fluid rounded-circle mx-auto d-block" style="max-width: 300px; max-height: 300px;" />
+                </div>
+            </div>
+            <!-- Permitir al usuario cargar una nueva foto -->
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Nueva Foto: </label>
+                <div class="col-sm-8">
+                    <input type="file" class="form-control" name="nuevaFoto" (change)="onFileChange($event)" />
+                </div>
+                <div class="col-sm-2">
+                    <!-- Botón para subir la nueva foto -->
+                    <button type="button" [disabled]="archivos == null" class="btn btn-primary" (click)="subirImagen()">
+                        <i class="fa-solid fa-cloud-arrow-up me-2"></i>Subir Nueva Foto
+                    </button>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Cédula: </label>
+                <div class="col-sm-10">
+                    <input #cedula="ngModel"
+                        [ngClass]="cedula.invalid && (cedula.dirty || cedula.touched) ? 'is-invalid' : ''" type="text"
+                        name="cedula" class="form-control" required [(ngModel)]="detallePacienteDTO.cedula" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Nombre: </label>
+                <div class="col-sm-10">
+                    <input #nombre="ngModel"
+                        [ngClass]="nombre.invalid && (nombre.dirty || nombre.touched) ? 'is-invalid' : ''" type="text"
+                        name="nombre" class="form-control" required [(ngModel)]="detallePacienteDTO.nombre" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Teléfono: </label>
+                <div class="col-sm-10">
+                    <input #telefono="ngModel"
+                        [ngClass]="telefono.invalid && (telefono.dirty || telefono.touched) ? 'is-invalid' : ''"
+                        type="text" name="telefono" class="form-control" required
+                        [(ngModel)]="detallePacienteDTO.telefono" />
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Ciudad: </label>
+                <div class="col-sm-10">
+                    <select name="ciudad" required class="form-select" [(ngModel)]="detallePacienteDTO.ciudad">
+                        <option value="" selected>Seleccione una ciudad</option>
+                        <option [value]="item" *ngFor="let item of ciudades; index as i">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Fecha de nacimiento: </label>
+                <div class="col-sm-10">
+                    <input #fechaNacimiento="ngModel"
+                        [ngClass]="fechaNacimiento.invalid && (fechaNacimiento.dirty || fechaNacimiento.touched) ? 'is-invalid' : ''"
+                        type="date" name="fechaNacimiento" class="form-control" required
+                        [(ngModel)]="detallePacienteDTO.fechaNacimiento" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Alergias: </label>
+                <div class="col-sm-10">
+                    <input #alergias="ngModel"
+                        [ngClass]="alergias.invalid && (alergias.dirty || alergias.touched) ? 'is-invalid' : ''"
+                        type="text" name="alergias" class="form-control" required
+                        [(ngModel)]="detallePacienteDTO.alergias" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">EPS: </label>
+                <div class="col-sm-10">
+                    <select name="eps" required class="form-select" [(ngModel)]="detallePacienteDTO.eps">
+                        <option value="" selected>Seleccione la EPS</option>
+                        <option [value]="item" *ngFor="let item of eps; index as i">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Tipo de sangre: </label>
+                <div class="col-sm-10">
+                    <select name="tipo de sangre" required class="form-select"
+                        [(ngModel)]="detallePacienteDTO.tipoSangre">
+                        <option value="" selected>Seleccione la Tipo de Sangre</option>
+                        <option [value]="item" *ngFor="let item of tipoSangre; index as i">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Correo electrónico: </label>
+                    <div class="col-sm-10">
+                        <input #correo="ngModel"
+                            [ngClass]="correo.invalid && (correo.dirty || correo.touched) ? 'is-invalid' : ''"
+                            type="email" name="correo" class="form-control" required
+                            [(ngModel)]="detallePacienteDTO.correo" />
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit" [disabled]="f.invalid" (click)="editarPerfil()">
+                    <i class="fa-solid fa-user-edit me-1"></i>Guardar Cambios
+                </button>
+                <!-- Botón para abrir el modal de confirmación para eliminar la cuenta -->
+                <button class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#confirmarEliminacionModal">
+                    <i class="fa-solid fa-user-times me-1"></i>Eliminar Cuenta
+                </button>
+
+                <!-- Modal de confirmación para eliminar la cuenta -->
+                <div class="modal fade" id="confirmarEliminacionModal" tabindex="-1" role="dialog"
+                    aria-labelledby="confirmarEliminacionModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmarEliminacionModalLabel">Confirmar Eliminación de
+                                    Cuenta</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <!-- Botón para confirmar la eliminación de la cuenta -->
+                                <button type="button" class="btn btn-danger" (click)="eliminarCuenta()">Eliminar
+                                    Cuenta</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <app-alerta [alerta]="alerta"></app-alerta>
+            </div>
+        </form>
+    </div>
+</div>
