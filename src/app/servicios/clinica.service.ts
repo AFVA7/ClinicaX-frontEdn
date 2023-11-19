@@ -27,4 +27,9 @@ export class ClinicaService {
   public listarMedicos(): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.clinicaURL}/listar-medicos`);
   }
+  public listarMotivosDeCancelamiento(): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.clinicaURL}/listar-motivos-cancelamiento`);
+  }
+
+  
 }

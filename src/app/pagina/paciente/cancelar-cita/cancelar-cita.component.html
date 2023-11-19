@@ -1,1 +1,20 @@
-<p>cancelar-cita works!</p>
+<div class="container mt-5">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Cancelar Cita</h4>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="cancelarCita()" #cancelarCitaForm="ngForm">
+          <div class="mb-3">
+            <label class="fw-bold">Motivo de Cancelación:</label>
+            <select class="form-control" name="motivoCancelacion" [(ngModel)]="cancelamientoDTO.motivo" required>
+              <option *ngFor="let motivo of motivos" [value]="motivo">{{ motivo }}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-danger">Cancelar Cita</button>
+        </form>
+      </div>
+    </div>
+    <app-alerta [alerta]="alerta"></app-alerta>
+  </div>
+  

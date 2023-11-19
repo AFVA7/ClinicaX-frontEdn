@@ -4,6 +4,11 @@
     </div>
     <div class="card-body p-5">
         <div class="mb-3">
+
+            <button type="button" (click)="toggleMostrarSoloPendientes()" class="btn btn-primary me-2">
+                {{ mostrarSoloPendientes ? 'Mostrar Todas' : 'Mostrar Pendientes'}}
+            </button>
+
             <button type="button" routerLink="/agendar-cita" class="btn btn-success me-2"><i
                     class="fa-solid fa-plus me-1"></i> Agendar</button>
         </div>
@@ -15,10 +20,11 @@
                     <th>Nombre Medico</th>
                     <th>Fecha</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr *ngFor="let item of citas">
+                <tr *ngFor="let item of getCitasFiltradas()">
                     <td>
                         <p>{{item.codigo}}</p>
                     </td>
@@ -38,6 +44,12 @@
                     <td><a routerLink="/detalle-cita/{{item.codigo}}"><i class="fa-solid
         
         fa-circle-info me-2"></i>Ver detalle</a></td>
+        <td>
+            <a *ngIf="item.estadoCita == 'PROGRAMADA'" routerLink="/cancelar-cita/{{item.codigo}}">
+                <i class="fa-solid fa-times-circle me-2"></i>Cancelar cita
+            </a>
+        </td>
+                    
 
                 </tr>
             </tbody>

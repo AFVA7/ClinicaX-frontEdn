@@ -10,12 +10,36 @@ import { TokenService } from 'src/app/servicios/token.service';
 })
 export class GestionCitasComponent {
   codigoPaciente: number;
-
   citas: ItemCitaDTO[];
+  mostrarSoloPendientes: boolean = false;
   constructor(private citaService: CitaService, private tokenService: TokenService) {
     this.citas = [];
     this.codigoPaciente = this.tokenService.getCodigo();
     this.listarCitas(this.codigoPaciente);
+    this.obtenerCitas(this.codigoPaciente);
+  }
+
+  private obtenerCitas(codigo: number) {
+    this.citaService.obtenerCitasPendientes(codigo).subscribe({
+      next: data => {
+        this.citas = data.respuesta;
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+  }
+
+  toggleMostrarSoloPendientes() {
+    this.mostrarSoloPendientes = !this.mostrarSoloPendientes;
+  }
+
+  getCitasFiltradas() {
+    if (this.mostrarSoloPendientes) {
+      return this.citas.filter(item => item.estadoCita === 'PROGRAMADA');
+    } else {
+      return this.citas;
+    }
   }
 
   private listarCitas(codigo: number) {

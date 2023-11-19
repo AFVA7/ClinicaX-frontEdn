@@ -17,12 +17,18 @@ import { EditarPerfilComponent } from './pagina/editar-perfil/editar-perfil.comp
 import { CrearMedicoComponent } from './pagina/admin/gestiona-medicos/crear-medico/crear-medico.component';
 import { ResponderPqrsComponent } from './pagina/gestion-pqrs/responder-pqrs/responder-pqrs.component';
 import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasena/olvidaste-contrasena.component';
+import { CancelarCitaComponent } from './pagina/paciente/cancelar-cita/cancelar-cita.component';
 const routes: Routes = [
     { path: "", component: InicioComponent },
     { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
     { path: "registro", component: RegistroComponent, canActivate: [LoginGuard] },
     { path: "detalle/:id", component: RegistroComponent },
     { path: "olvidaste-contrasena", component: OlvidasteContrasenaComponent },
+    {
+        path: "cancelar-cita/:codigo", component: CancelarCitaComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["PACIENTE"]
+        }
+    },
     {
         path: "gestion-pqrs", component: GestionPqrsComponent, canActivate: [RolesGuard], data: {
             expectedRole: ["PACIENTE", "ADMIN"]

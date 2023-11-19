@@ -6,6 +6,7 @@ import { MensajeDTO } from '../modelo/mensaje-dto';
 import { HttpClient } from '@angular/common/http';
 import { AgendarCitaDTO2 } from '../modelo/agendar-cita-dto2';
 import { format } from 'date-fns-tz';
+import { CancelamientoCitaDTO } from '../modelo/cancelamienti-cita-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +24,20 @@ export class CitaService {
   public obtenerCita(codigo: number): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.citaURL}/detalle-cita/${codigo}`);
   }
+
+  public obtenerCitasPendientes(codigo: number): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.citaURL}/citas-pendientes-paciente/${codigo}`);
+  }
   
   public agendarCita(datos: AgendarCitaDTO2): Observable<MensajeDTO> {
     console.log(datos);
     return this.http.post<MensajeDTO>(`${this.pacienteURL}/agendar-cita`, datos);
   }
-  
+
+  public cancelarCita (datos: CancelamientoCitaDTO): Observable<MensajeDTO> {
+    return this.http.post<MensajeDTO>(`${this.citaURL}/cancelar`, datos);
+  }
+
   formatLocalDateTime(fecha: string, hora: string): string {
     // Combina la fecha y la hora para crear un string en formato 'yyyy-MM-ddTHH:mm'
     const fechaHoraString = `${fecha}T${hora}`;
