@@ -1,12 +1,29 @@
-<div>
-    <h3>Responder PQR</h3>
-    <form (ngSubmit)="responderPQR()" #f="ngForm">
+<!-- responder-pqrs.component.html -->
+
+<div class="card">
+  <div class="card-header ps-5 pt-4 pb-4">
+    <h5 class="mb-0"><i class="fa-solid fa-comments me-3"></i>Respuesta a PQRS</h5>
+  </div>
+  <div class="card-body p-5" id="contenedorMensajes">
+    <!-- Mensajes del Administrador -->
+    <div *ngFor="let mensaje of mensajesAdmin" class="mensaje mensaje-admin">
+      <p>{{ mensaje.contenido }}</p>
+      <small>{{ mensaje.fecha }} - Administrador</small>
+    </div>
+
+    <!-- Mensajes del Paciente -->
+    <div *ngFor="let mensaje of mensajesPaciente" class="mensaje mensaje-paciente">
+      <p>{{ mensaje.contenido }}</p>
+      <small>{{ mensaje.fecha }} - Paciente</small>
+    </div>
+
+    <!-- Formulario para enviar mensaje -->
+    <form (ngSubmit)="responderPQR()" #mensajeForm="ngForm">
       <div class="mb-3">
-        <label for="respuesta">Respuesta:</label>
-        <textarea name="respuesta" [(ngModel)]="respuesta" class="form-control" id="respuesta" required></textarea>
+        <textarea class="form-control" name="contenido" [(ngModel)]="registroRespuesta.mensaje" required></textarea>
       </div>
-      <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Enviar respuesta</button>
-      </div>
+      <button type="submit" class="btn btn-primary">Enviar</button>
+      <app-alerta [alerta]="alerta"></app-alerta>
     </form>
   </div>
+</div>

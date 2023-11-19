@@ -45,7 +45,6 @@ export class CrearPqrsComponent {
   public seleccionar(codigoCita: number) {
     this.registroPQRSDTO.codigoCita = codigoCita;
     this.registroPQRSDTO.codigoPaciente = this.codigoPaciente;
-
   }
 
   public cargarTiposPQRS() {

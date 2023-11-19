@@ -24,6 +24,11 @@ export class TokenService {
     return sessionStorage.getItem(TOKEN_KEY);
   }
 
+  public esAdmin(): boolean {
+    const roles = this.getRole();
+    return roles.includes('ADMIN'); 
+  }
+
   public getRefreshToken(): string | null {
     return sessionStorage.getItem(REFRESH_TOKEN_KEY);
   }

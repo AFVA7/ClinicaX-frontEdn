@@ -1,1 +1,34 @@
-<p>{{pqrs | json}}</p>
+<div class="container mt-5" *ngIf="pqrs">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Detalle de PQRS</h4>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <p><strong>Código:</strong> {{pqrs.codigo}}</p>
+          <p><strong>Estado:</strong> {{pqrs.estado}}</p>
+          <p><strong>Motivo:</strong> {{pqrs.motivo}}</p>
+          <p><strong>Nombre Paciente:</strong> {{pqrs.nombrePaciente}}</p>
+          <p><strong>Nombre Médico:</strong> {{pqrs.nombreMedico}}</p>
+          <p><strong>Especialidad:</strong> {{pqrs.especialidad}}</p>
+          <p><strong>Fecha de Creación:</strong> {{pqrs.fechaDeCreacion}}</p>
+        </div>
+  
+        <div class="mb-3">
+          <h5>Mensajes</h5>
+          <div *ngFor="let mensaje of pqrs.mensajes">
+            <div *ngIf="mensaje.mensajeAsociado === 'Paciente'">
+              <p><strong>Paciente - {{mensaje.nombreUsuario}}</strong></p>
+            </div>
+            <div *ngIf="mensaje.mensajeAsociado === 'Administrador'">
+              <p><strong>Administrador - {{mensaje.nombreUsuario}}</strong></p>
+            </div>
+            <p>{{mensaje.contenido}}</p>
+            <p><em>{{mensaje.fecha}}</em></p>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

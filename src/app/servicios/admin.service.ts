@@ -9,9 +9,13 @@ import { MensajeDTO } from '../modelo/mensaje-dto';
 })
 export class AdminService {
 
-  private medicoURL = "http://localhost:8080/api/admins";
+  private adminURL = "http://localhost:8080/api/admins";
   constructor(private http: HttpClient) { }
   public registrarMedico(medico: RegistroMedicoDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.medicoURL}/crear-medico`, medico);
+    return this.http.post<MensajeDTO>(`${this.adminURL}/crear-medico`, medico);
+  }
+
+  public listarPQRS(): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.adminURL}/listar-pqrs`);
   }
 }

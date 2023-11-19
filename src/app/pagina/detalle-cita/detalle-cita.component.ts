@@ -23,7 +23,6 @@ export class DetalleCitaComponent {
     this.citaService.obtenerCita(codigo).subscribe({
       next: data => {
         this.cita = data.respuesta;
-        console.log(this.cita);
       },
       error: error => {
         console.log(error);

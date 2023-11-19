@@ -1,0 +1,23 @@
+/* Estilos para las burbujas de mensajes */
+.mensaje {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.mensaje-admin {
+  background-color: #DCF8C6;
+  float: left;
+  /* Mensajes del administrador a la izquierda */
+}
+
+.mensaje-paciente {
+  background-color: #E3E3E3;
+  float: right;
+  /* Mensajes del paciente a la derecha */
+}
+
+#contenedorMensajes {
+  max-height: 400px;
+  overflow-y: auto;
+}
