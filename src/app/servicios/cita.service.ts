@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ItemCitaDTO } from '../modelo/item-cita-dto';
-import { AgendarCitaDTO } from '../modelo/agendar-cita-dto';
 import { Observable } from 'rxjs';
 import { MensajeDTO } from '../modelo/mensaje-dto';
 import { HttpClient } from '@angular/common/http';
@@ -23,6 +21,10 @@ export class CitaService {
   
   public listarParaPQRS(codigo: number):  Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.citaURL}/listar-citas-para-pqrs/${codigo}`);
+  }
+
+  public listarCitasMedico(codigo: number):  Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.citaURL}/citas-pendientes-medico/${codigo}`);
   }
   
   public obtenerCita(codigo: number): Observable<MensajeDTO> {
@@ -50,4 +52,5 @@ export class CitaService {
     const formattedFechaHora = format(fechaHora, "yyyy-MM-dd'T'HH:mm", { timeZone: 'America/Bogota' });
     return formattedFechaHora;
   }
+
 }

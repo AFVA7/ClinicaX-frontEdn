@@ -10,15 +10,26 @@ import { TokenService } from 'src/app/servicios/token.service';
 })
 export class GestionCitasComponent {
   codigoPaciente: number;
+  codigoMedico: number;
   citas: ItemCitaDTO[];
   mostrarSoloPendientes: boolean = false;
   mostrarHistorial: boolean = false;
+  esMedico: boolean = false;
   constructor(private citaService: CitaService, private tokenService: TokenService) {
     this.citas = [];
     this.codigoPaciente = this.tokenService.getCodigo();
-    this.listarTodasLasCitas(this.codigoPaciente);
-    this.obtenerCitasPendientes(this.codigoPaciente);
+    this.codigoMedico = this.tokenService.getCodigo();
   }
+
+  ngOnInit(): void {
+    this.esMedico = this.tokenService.esMedico();
+    if (this.esMedico) {
+      this.listarCitasMedico();
+    }else{
+      this.listarTodasLasCitas(this.codigoPaciente);
+    }
+  }
+ 
 
   private obtenerCitasPendientes(codigo: number) {
     this.citaService.obtenerCitasPendientes(codigo).subscribe({
@@ -33,6 +44,7 @@ export class GestionCitasComponent {
 
   toggleMostrarSoloPendientes() {
     this.mostrarSoloPendientes = !this.mostrarSoloPendientes;
+    this.obtenerCitasPendientes(this.codigoPaciente);
   }
   toggleMostrarHistorial() {
     this.mostrarHistorial = !this.mostrarHistorial;
@@ -49,6 +61,17 @@ export class GestionCitasComponent {
 
   private listarTodasLasCitas(codigo: number) {
     this.citaService.listar(codigo).subscribe({
+      next: data => {
+        this.citas = data.respuesta;
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+  }
+
+  private listarCitasMedico() {
+    this.citaService.listarCitasMedico(this.codigoMedico).subscribe({
       next: data => {
         this.citas = data.respuesta;
       },

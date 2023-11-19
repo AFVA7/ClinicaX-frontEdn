@@ -19,14 +19,14 @@ export class GestionPqrsComponent {
   esAdmin: boolean = false;
   constructor(private pacienteService: PacienteService, private tokenService: TokenService, private pqrsService: PqrsService, private adminService: AdminService) {
     this.pqrs = [];
-    
+
   }
 
   ngOnInit(): void {
     this.esAdmin = this.tokenService.esAdmin();
     if (this.esAdmin) {
       this.listarPqrs();
-    }else{
+    } else {
       this.listarPqrsDeUnPaciente();
     }
   }

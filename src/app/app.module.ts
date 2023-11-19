@@ -26,7 +26,6 @@ import { GestionCitasComponent } from './pagina/gestion-citas/gestion-citas.comp
 import { AgendarCitaComponent } from './pagina/agendar-cita/agendar-cita.component';
 import { DetalleCitaComponent } from './pagina/detalle-cita/detalle-cita.component';
 import { AlertaComponent } from './pagina/alerta/alerta.component';
-import { AtencionCitaComponent } from './pagina/atencion-cita/atencion-cita.component';
 import { UsuarioInterceptor } from './interceptor/usuario.interceptor';
 import { EditarPerfilComponent } from './pagina/editar-perfil/editar-perfil.component';
 import { ResponderPqrsComponent } from './pagina/gestion-pqrs/responder-pqrs/responder-pqrs.component';
@@ -56,7 +55,6 @@ import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasen
     AgendarCitaComponent,
     DetalleCitaComponent,
     AlertaComponent,
-    AtencionCitaComponent,
     EditarPerfilComponent,
     ResponderPqrsComponent,
     OlvidasteContrasenaComponent

@@ -11,13 +11,13 @@ import { AgendarCitaComponent } from './pagina/agendar-cita/agendar-cita.compone
 import { DetalleCitaComponent } from './pagina/detalle-cita/detalle-cita.component';
 import { LoginGuard } from './guards/permiso.service';
 import { RolesGuard } from './guards/roles.service';
-import { AtencionCitaComponent } from './pagina/atencion-cita/atencion-cita.component';
 import { GestionaMedicosComponent } from './pagina/admin/gestiona-medicos/gestiona-medicos.component';
 import { EditarPerfilComponent } from './pagina/editar-perfil/editar-perfil.component';
 import { CrearMedicoComponent } from './pagina/admin/gestiona-medicos/crear-medico/crear-medico.component';
 import { ResponderPqrsComponent } from './pagina/gestion-pqrs/responder-pqrs/responder-pqrs.component';
 import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasena/olvidaste-contrasena.component';
 import { CancelarCitaComponent } from './pagina/paciente/cancelar-cita/cancelar-cita.component';
+import { AtenderCitaComponent } from './pagina/medico/atender-cita/atender-cita.component';
 const routes: Routes = [
     { path: "", component: InicioComponent },
     { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
@@ -44,7 +44,7 @@ const routes: Routes = [
         data: { expectedRole: ["PACIENTE", "ADMIN"] }
     },
     {
-        path: "atender-cita", component: AtencionCitaComponent, canActivate: [RolesGuard], data: {
+        path: "atender-cita/:codigo", component: AtenderCitaComponent, canActivate: [RolesGuard], data: {
             expectedRole: ["MEDICO"]
         }
     },
@@ -55,7 +55,7 @@ const routes: Routes = [
     },
     {
         path: "gestion-citas", component: GestionCitasComponent, canActivate: [RolesGuard], data: {
-            expectedRole: ["PACIENTE"]
+            expectedRole: ["PACIENTE", "MEDICO"]
         }
     },
     {

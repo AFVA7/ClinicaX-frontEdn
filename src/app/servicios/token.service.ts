@@ -29,6 +29,11 @@ export class TokenService {
     return roles.includes('ADMIN'); 
   }
 
+  public esMedico(): boolean {
+    const roles = this.getRole();
+    return roles.includes('MEDICO'); 
+  }
+
   public getRefreshToken(): string | null {
     return sessionStorage.getItem(REFRESH_TOKEN_KEY);
   }

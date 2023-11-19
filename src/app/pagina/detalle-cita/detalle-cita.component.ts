@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Alerta } from 'src/app/modelo/alerta';
 import { DetalleCitaDTO } from 'src/app/modelo/detalle-cita-dto';
 import { CitaService } from 'src/app/servicios/cita.service';
 
@@ -9,7 +10,7 @@ import { CitaService } from 'src/app/servicios/cita.service';
   styleUrls: ['./detalle-cita.component.css']
 })
 export class DetalleCitaComponent {
-
+ alerta!: Alerta;
   codigoCita: number = 0;
   cita!: DetalleCitaDTO;
   constructor(private route: ActivatedRoute, private citaService: CitaService) {

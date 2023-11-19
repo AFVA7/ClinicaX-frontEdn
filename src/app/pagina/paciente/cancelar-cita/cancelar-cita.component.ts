@@ -28,6 +28,7 @@ export class CancelarCitaComponent {
    }
 
   public cancelarCita() {
+    console.log(this.cancelamientoDTO);
     this.citaService.cancelarCita(this.cancelamientoDTO).subscribe({
       next: data => {
         this.alerta = { mensaje: data.respuesta, tipo: "success" };
