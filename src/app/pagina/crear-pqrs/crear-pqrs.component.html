@@ -3,17 +3,13 @@
         <h5 class="mb-0"><i class="fa-solid fa-file-circle-plus me-2"></i>Crear nueva PQRS</h5>
     </div>
     <div class="card-body p-5">
-        <form #f="ngForm" (ngSubmit)="crearPqrs()">
+        <form #f="ngForm" >
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Tipo: </label>
                 <div class="col-sm-10">
-                    <select name="tipo" required class="form-select" [(ngModel)]="registroPQRSDTO.tipo">
-
+                    <select name="tipo" required class="form-select" [(ngModel)]="registroPQRSDTO.tipoPQRS">
                         <option value="" selected>Seleccione un tipo</option>
-                        <option value="Queja">Queja</option>
-                        <option value="Reclamo">Reclamo</option>
-                        <option value="Sugerencia">Sugerencia</option>
-                        <option value="Petición">Petición</option>
+                        <option [value]="item" *ngFor="let item of tiposPQRS; index as i">{{item}}</option>
                     </select>
                 </div>
             </div>
@@ -31,34 +27,19 @@
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                            <tr>
-                                <td><input class="form-check-input" type="checkbox" (change)="seleccionar(1)" /></td>
+                            <tr *ngFor="let cita of citas">
+                                <td><input class="form-check-input" type="checkbox" (change)="seleccionar(cita.codigo)" /></td>
                                 <td>
-                                    <p>1</p>
+                                    <p>{{cita.codigo}}</p>
                                 </td>
                                 <td>
-                                    <p>OFTALMOLOGÍA</p>
+                                    <p>{{cita.especialidad}}</p>
                                 </td>
                                 <td>
-                                    <p>2023-10-20</p>
+                                    <p>{{cita.fecha}}</p>
                                 </td>
                                 <td>
-                                    <p>Pedrito</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input class="form-check-input" type="checkbox" (change)="seleccionar(2)" /></td>
-                                <td>
-                                    <p>2</p>
-                                </td>
-                                <td>
-                                    <p>GENERAL</p>
-                                </td>
-                                <td>
-                                    <p>2023-10-10</p>
-                                </td>
-                                <td>
-                                    <p>Juanito</p>
+                                    <p>{{cita.medico}}</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -73,9 +54,10 @@
                         [(ngModel)]="registroPQRSDTO.motivo" name="motivo" required class="form-control"></textarea>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit" [disabled]="f.invalid">
+            <button class="btn btn-primary" type="submit" [disabled]="f.invalid" (click)="crearPqrs()">
                 <i class="fa-solid fa-circle-plus me-1"></i>Crear PQRS
             </button>
         </form>
     </div>
+    <app-alerta [alerta]="alerta"></app-alerta>
 </div>

@@ -16,11 +16,11 @@ export class GestionCitasComponent {
   constructor(private citaService: CitaService, private tokenService: TokenService) {
     this.citas = [];
     this.codigoPaciente = this.tokenService.getCodigo();
-    this.listarCitas(this.codigoPaciente);
-    this.obtenerCitas(this.codigoPaciente);
+    this.listarTodasLasCitas(this.codigoPaciente);
+    this.obtenerCitasPendientes(this.codigoPaciente);
   }
 
-  private obtenerCitas(codigo: number) {
+  private obtenerCitasPendientes(codigo: number) {
     this.citaService.obtenerCitasPendientes(codigo).subscribe({
       next: data => {
         this.citas = data.respuesta;
@@ -47,7 +47,7 @@ export class GestionCitasComponent {
       return this.citas;
   }
 
-  private listarCitas(codigo: number) {
+  private listarTodasLasCitas(codigo: number) {
     this.citaService.listar(codigo).subscribe({
       next: data => {
         this.citas = data.respuesta;

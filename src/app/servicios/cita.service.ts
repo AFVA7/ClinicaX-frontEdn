@@ -21,6 +21,10 @@ export class CitaService {
     return this.http.get<MensajeDTO>(`${this.citaURL}/listar-todas/${codigo}`);
   }
   
+  public listarParaPQRS(codigo: number):  Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.citaURL}/listar-citas-para-pqrs/${codigo}`);
+  }
+  
   public obtenerCita(codigo: number): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.citaURL}/detalle-cita/${codigo}`);
   }
@@ -30,7 +34,6 @@ export class CitaService {
   }
   
   public agendarCita(datos: AgendarCitaDTO2): Observable<MensajeDTO> {
-    console.log(datos);
     return this.http.post<MensajeDTO>(`${this.pacienteURL}/agendar-cita`, datos);
   }
 

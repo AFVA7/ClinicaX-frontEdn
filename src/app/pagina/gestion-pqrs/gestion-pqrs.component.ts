@@ -18,7 +18,7 @@ export class GestionPqrsComponent {
   constructor(private pacienteService: PacienteService, private tokenService: TokenService, private pqrsService: PqrsService) {
     this.pqrs = [];
     this.obtenerPqrs();
-    this.pqrs = pqrsService.listar();
+    //this.pqrs = pqrsService.listar();
   }
 
   public obtenerPqrs() {

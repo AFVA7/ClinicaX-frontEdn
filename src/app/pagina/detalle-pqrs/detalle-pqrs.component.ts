@@ -14,10 +14,10 @@ export class DetallePqrsComponent {
   constructor(private route: ActivatedRoute, private pqrsService: PqrsService) {
     this.route.params.subscribe(params => {
       this.codigoPqrs = params['codigo'];
-      let pqrsConsultado = pqrsService.obtener(parseInt(this.codigoPqrs));
-      if (pqrsConsultado != undefined) {
-        this.pqrs = pqrsConsultado;
-      }
+      // let pqrsConsultado = pqrsService.obtener(parseInt(this.codigoPqrs));
+      // if (pqrsConsultado != undefined) {
+      //   this.pqrs = pqrsConsultado;
+      // }
     });
   }
 }
