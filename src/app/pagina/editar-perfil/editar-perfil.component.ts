@@ -21,17 +21,19 @@ export class EditarPerfilComponent {
   eps: string[];
   tipoSangre: string[];
   archivos!: FileList;
+  urlFoto: string | ArrayBuffer | null = null;
   alerta!: Alerta;
 
   constructor(private pacienteService: PacienteService, private authService: AuthService, private clinicaService: ClinicaService, private imagenService: ImagenService, private tokenService: TokenService, private router: Router) {
     this.detallePacienteDTO = new DetallePacienteDTO();
+    this.obtenerDatosPaciente();
     this.ciudades = [];
     this.cargarCiudades();
     this.eps = [];
     this.cargarEps();
     this.tipoSangre = [];
     this.cargarTipoSangre();
-    this.obtenerDatosPaciente();
+
   }
 
   public obtenerDatosPaciente() {
@@ -88,68 +90,69 @@ export class EditarPerfilComponent {
   }
 
   public eliminarCuenta() {
-  this.pacienteService.eliminarCuenta(this.tokenService.getCodigo()).subscribe({
-    next: data => {
-      this.alerta = { mensaje: data.respuesta, tipo: "success" };
-      this.tokenService.logout();
-    },
-    error: error => {
-      this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
-    }
-  });
-
-}
-
-  private cargarCiudades() {
-  this.clinicaService.listarCiudades().subscribe({
-    next: data => {
-      this.ciudades = data.respuesta;
-    },
-    error: error => {
-      console.log(error);
-    }
-  });
-}
-  private cargarEps() {
-  this.clinicaService.listarEPS().subscribe({
-    next: data => {
-      this.eps = data.respuesta;
-    },
-    error: error => {
-      console.log(error);
-    }
-  });
-}
-  private cargarTipoSangre() {
-  this.clinicaService.listarTipoSangre().subscribe({
-    next: data => {
-      this.tipoSangre = data.respuesta;
-    },
-    error: error => {
-      console.log(error);
-    }
-  });
-}
-  public subirImagen() {
-  if (this.archivos != null && this.archivos.length > 0) {
-    const formData = new FormData();
-    formData.append('file', this.archivos[0]);
-    this.imagenService.subir(formData).subscribe({
+    this.pacienteService.eliminarCuenta(this.tokenService.getCodigo()).subscribe({
       next: data => {
-        this.detallePacienteDTO.urlFoto = data.respuesta.url;
+        this.alerta = { mensaje: data.respuesta, tipo: "success" };
+        this.tokenService.logout();
       },
       error: error => {
-        this.alerta = { mensaje: error.error, tipo: "danger" };
+        this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
       }
     });
-  } else {
-    this.alerta = { mensaje: 'Debe seleccionar una imagen y subirla', tipo: "danger" };
+
   }
-}
+
+  private cargarCiudades() {
+    this.clinicaService.listarCiudades().subscribe({
+      next: data => {
+        this.ciudades = data.respuesta;
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+  }
+  private cargarEps() {
+    this.clinicaService.listarEPS().subscribe({
+      next: data => {
+        this.eps = data.respuesta;
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+  }
+  private cargarTipoSangre() {
+    this.clinicaService.listarTipoSangre().subscribe({
+      next: data => {
+        this.tipoSangre = data.respuesta;
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+  }
+  public subirImagen() {
+    if (this.archivos != null && this.archivos.length > 0) {
+      const formData = new FormData();
+      formData.append('file', this.archivos[0]);
+      this.imagenService.subir(formData).subscribe({
+        next: data => {
+          this.detallePacienteDTO.urlFoto = data.respuesta.url;
+          this.urlFoto = data.respuesta.url;
+        },
+        error: error => {
+          this.alerta = { mensaje: error.error, tipo: "danger" };
+        }
+      });
+    } else {
+      this.alerta = { mensaje: 'Debe seleccionar una imagen y subirla', tipo: "danger" };
+    }
+  }
   public onFileChange(event: any) {
-  if (event.target.files.length > 0) {
-    this.detallePacienteDTO.urlFoto = event.target.files[0].name;
-    this.archivos = event.target.files;
+    if (event.target.files.length > 0) {
+      this.detallePacienteDTO.urlFoto = event.target.files[0].name;
+      this.archivos = event.target.files;
+    }
   }
-}
 }

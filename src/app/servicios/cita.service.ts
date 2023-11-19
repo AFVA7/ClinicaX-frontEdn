@@ -12,6 +12,8 @@ import { format } from 'date-fns-tz';
 })
 export class CitaService {
   private pacienteURL = "http://localhost:8080/api/pacientes";
+  private citaURL = "http://localhost:8080/api/citas";
+  
   cita: ItemCitaDTO[];
   constructor(private http: HttpClient) {
     
@@ -33,9 +35,10 @@ export class CitaService {
         '2023-10-12'
     });
   }
-  public listar(): ItemCitaDTO[] {
-    return this.cita;
+  public listar(codigo: number):  Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.citaURL}/listar-todas/${codigo}`);
   }
+  
   public obtener(codigo: number): ItemCitaDTO | undefined {
     return this.cita.find(cita => cita.codigo == codigo);
   }

@@ -14,7 +14,6 @@ import { HistorialConsultasComponent } from './pagina/admin/historial-consultas/
 import { PacienteComponent } from './pagina/paciente/paciente.component';
 import { AgendarComponent } from './pagina/paciente/agendar/agendar.component';
 import { CancelarCitaComponent } from './pagina/paciente/cancelar-cita/cancelar-cita.component';
-import { RecuperarPasswdComponent} from './pagina/paciente/recuperar-passwd/recuperar-passwd.component';
 import { MedicoComponent } from './pagina/medico/medico.component';
 import { AtenderCitaComponent } from './pagina/medico/atender-cita/atender-cita.component';
 import { DiaLibreComponent } from './pagina/medico/dia-libre/dia-libre.component';
@@ -46,7 +45,6 @@ import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasen
     PacienteComponent,
     AgendarComponent,
     CancelarCitaComponent,
-    RecuperarPasswdComponent,
     MedicoComponent,
     AtenderCitaComponent,
     DiaLibreComponent,
