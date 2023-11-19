@@ -12,6 +12,7 @@ export class GestionCitasComponent {
   codigoPaciente: number;
   citas: ItemCitaDTO[];
   mostrarSoloPendientes: boolean = false;
+  mostrarHistorial: boolean = false;
   constructor(private citaService: CitaService, private tokenService: TokenService) {
     this.citas = [];
     this.codigoPaciente = this.tokenService.getCodigo();
@@ -33,13 +34,17 @@ export class GestionCitasComponent {
   toggleMostrarSoloPendientes() {
     this.mostrarSoloPendientes = !this.mostrarSoloPendientes;
   }
+  toggleMostrarHistorial() {
+    this.mostrarHistorial = !this.mostrarHistorial;
+  }
 
   getCitasFiltradas() {
     if (this.mostrarSoloPendientes) {
       return this.citas.filter(item => item.estadoCita === 'PROGRAMADA');
-    } else {
-      return this.citas;
+    } else if (this.mostrarHistorial) {
+      return this.citas.filter(item => item.estadoCita === 'CANCELADA' || item.estadoCita === 'COMPLETADA');
     }
+      return this.citas;
   }
 
   private listarCitas(codigo: number) {

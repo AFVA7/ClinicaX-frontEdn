@@ -23,7 +23,6 @@
         <li *ngIf="isLogged && rol.includes('PACIENTE') || rol.includes('ADMIN')"><a routerLink="/gestion-pqrs" class="nav-link px-2 text-white">Gestión PQRS</a></li>
         <li *ngIf="isLogged && rol.includes('PACIENTE')"><a routerLink="/gestion-citas" class="nav-link px-2 text-white">Gestión Citas</a></li>
         <li *ngIf="isLogged && rol.includes('PACIENTE')"><a routerLink="/editar-perfil" class="nav-link px-2 text-white">Editar Perfil</a></li>
-        <li *ngIf="isLogged && rol.includes('PACIENTE')"><a routerLink="" class="nav-link px-2 text-white">Historial medico</a></li>
         <li *ngIf="isLogged && rol.includes('ADMIN')"><a routerLink="" class="nav-link px-2 text-white">Historial de consultas</a></li>
         <li *ngIf="isLogged && rol.includes('MEDICO')"><a routerLink="" class="nav-link px-2 text-white">Citas pendientes</a></li>
         <li *ngIf="isLogged && rol.includes('MEDICO')"><a routerLink="" class="nav-link px-2 text-white">Registrar día Libre</a></li>

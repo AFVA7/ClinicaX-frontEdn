@@ -8,7 +8,9 @@
             <button type="button" (click)="toggleMostrarSoloPendientes()" class="btn btn-primary me-2">
                 {{ mostrarSoloPendientes ? 'Mostrar Todas' : 'Mostrar Pendientes'}}
             </button>
-
+            <button type="button" (click)="toggleMostrarHistorial()" class="btn btn-info me-2">
+                {{ mostrarHistorial ? 'Mostrar Todas' : 'Mostrar Historial Médico'}}
+              </button>
             <button type="button" routerLink="/agendar-cita" class="btn btn-success me-2"><i
                     class="fa-solid fa-plus me-1"></i> Agendar</button>
         </div>
