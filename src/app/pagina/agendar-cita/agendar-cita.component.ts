@@ -58,7 +58,6 @@ export class AgendarCitaComponent {
           codigo: medico.codigo,
           nombre: medico.nombre
         }));
-        console.log(this.medicos);
       },
       error: error => {
         console.log(error);

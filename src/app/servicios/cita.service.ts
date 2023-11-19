@@ -14,41 +14,16 @@ export class CitaService {
   private pacienteURL = "http://localhost:8080/api/pacientes";
   private citaURL = "http://localhost:8080/api/citas";
   
-  cita: ItemCitaDTO[];
   constructor(private http: HttpClient) {
-    
-    this.cita = [];
-    this.cita.push({
-      codigo: 1,  nombrePaciente: 'Andrés Valencia', nombreMedico: 'Zaypar', estadoCita: 'PROGRAMADA', fecha:
-        '2023-10-12'
-    });
-    this.cita.push({
-      codigo: 1,  nombrePaciente: 'Andrés Valencia', nombreMedico: 'Zaypar', estadoCita: 'PROGRAMADA', fecha:
-        '2023-10-12'
-    });
-    this.cita.push({
-      codigo: 1,  nombrePaciente: 'Andrés Valencia', nombreMedico: 'Zaypar', estadoCita: 'CANCELADA', fecha:
-        '2023-10-12'
-    });
-    this.cita.push({
-      codigo: 1,  nombrePaciente: 'Andrés Valencia', nombreMedico: 'Zaypar', estadoCita: 'CANCELADA', fecha:
-        '2023-10-12'
-    });
   }
   public listar(codigo: number):  Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.citaURL}/listar-todas/${codigo}`);
   }
   
-  public obtener(codigo: number): ItemCitaDTO | undefined {
-    return this.cita.find(cita => cita.codigo == codigo);
+  public obtenerCita(codigo: number): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.citaURL}/detalle-cita/${codigo}`);
   }
-  public crear(cita: AgendarCitaDTO) {
-    let codigo = this.cita.length + 1;
-    this.cita.push({
-      codigo: codigo, nombrePaciente: ""+cita.idPaciente, nombreMedico: ""+cita.idMedico, estadoCita: 'PROGRAMADA', fecha: new
-        Date().toISOString()
-    });
-  }
+  
   public agendarCita(datos: AgendarCitaDTO2): Observable<MensajeDTO> {
     console.log(datos);
     return this.http.post<MensajeDTO>(`${this.pacienteURL}/agendar-cita`, datos);

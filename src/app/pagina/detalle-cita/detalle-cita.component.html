@@ -1,1 +1,46 @@
-<p>{{cita | json}}</p>
+<div class="container mt-5" *ngIf="cita">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Detalles de la Cita</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="fw-bold">Código de Cita:</label>
+            <p>{{ cita.codigoCita }}</p>
+          </div>
+          <div class="col-md-6">
+            <label class="fw-bold">Nombre del Paciente:</label>
+            <p>{{ cita.nombrePaciente }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="fw-bold">Nombre del Médico:</label>
+            <p>{{ cita.nombreMedico }}</p>
+          </div>
+          <div class="col-md-6">
+            <label class="fw-bold">Especialidad:</label>
+            <p>{{ cita.especialidad }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="fw-bold">Fecha:</label>
+            <p>{{ cita.fecha | date:'medium' }}</p>
+          </div>
+          <div class="col-md-6">
+            <label class="fw-bold">Motivo:</label>
+            <p>{{ cita.motivo }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="fw-bold">Estado de la Cita:</label>
+            <p>{{ cita.estado }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

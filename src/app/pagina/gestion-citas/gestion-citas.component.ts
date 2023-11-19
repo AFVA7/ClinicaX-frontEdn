@@ -21,8 +21,6 @@ export class GestionCitasComponent {
   private listarCitas(codigo: number) {
     this.citaService.listar(codigo).subscribe({
       next: data => {
-        console.log("este es el código: " + codigo);
-        console.log(data);
         this.citas = data.respuesta;
       },
       error: error => {

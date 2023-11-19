@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ItemCitaDTO } from 'src/app/modelo/item-cita-dto';
+import { DetalleCitaDTO } from 'src/app/modelo/detalle-cita-dto';
 import { CitaService } from 'src/app/servicios/cita.service';
 
 @Component({
@@ -10,16 +10,26 @@ import { CitaService } from 'src/app/servicios/cita.service';
 })
 export class DetalleCitaComponent {
 
-  codigoCita: string = "";
-  cita: ItemCitaDTO | undefined;
+  codigoCita: number = 0;
+  cita!: DetalleCitaDTO;
   constructor(private route: ActivatedRoute, private citaService: CitaService) {
     this.route.params.subscribe(params => {
       this.codigoCita = params['codigo'];
-      let citaConsultada = citaService.obtener(parseInt(this.codigoCita));
-      if (citaConsultada != undefined) {
-        this.cita = citaConsultada;
+    });
+    this.obtenerCita(this.codigoCita);
+  }
+
+  private obtenerCita(codigo: number) {
+    this.citaService.obtenerCita(codigo).subscribe({
+      next: data => {
+        this.cita = data.respuesta;
+        console.log(this.cita);
+      },
+      error: error => {
+        console.log(error);
       }
     });
   }
+  
 
 }

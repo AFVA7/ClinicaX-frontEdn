@@ -12,7 +12,6 @@ import { AdminComponent } from './pagina/admin/admin.component';
 import { GestionaMedicosComponent } from './pagina/admin/gestiona-medicos/gestiona-medicos.component';
 import { HistorialConsultasComponent } from './pagina/admin/historial-consultas/historial-consultas.component';
 import { PacienteComponent } from './pagina/paciente/paciente.component';
-import { AgendarComponent } from './pagina/paciente/agendar/agendar.component';
 import { CancelarCitaComponent } from './pagina/paciente/cancelar-cita/cancelar-cita.component';
 import { MedicoComponent } from './pagina/medico/medico.component';
 import { AtenderCitaComponent } from './pagina/medico/atender-cita/atender-cita.component';
@@ -43,7 +42,6 @@ import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasen
     GestionaMedicosComponent,
     HistorialConsultasComponent,
     PacienteComponent,
-    AgendarComponent,
     CancelarCitaComponent,
     MedicoComponent,
     AtenderCitaComponent,
