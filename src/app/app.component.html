@@ -25,8 +25,7 @@
         <li *ngIf="isLogged && rol.includes('PACIENTE')"><a routerLink="/editar-perfil" class="nav-link px-2 text-white">Editar Perfil</a></li>
         <li *ngIf="isLogged && rol.includes('ADMIN')"><a routerLink="" class="nav-link px-2 text-white">Historial de consultas</a></li>
         <li *ngIf="isLogged && rol.includes('MEDICO')"><a routerLink="/gestion-citas" class="nav-link px-2 text-white">Citas pendientes</a></li>
-        <li *ngIf="isLogged && rol.includes('MEDICO')"><a routerLink="" class="nav-link px-2 text-white">Registrar día Libre</a></li>
-        <li *ngIf="isLogged && rol.includes('MEDICO')"><a routerLink="" class="nav-link px-2 text-white">Historial de atenciones</a></li>
+        <li *ngIf="isLogged && rol.includes('MEDICO')"><a routerLink="/dia-libre" class="nav-link px-2 text-white">Registrar día Libre</a></li>
       </ul>
       <div class="text-end">
         <div *ngIf="!isLogged; then nologged else logged"></div>

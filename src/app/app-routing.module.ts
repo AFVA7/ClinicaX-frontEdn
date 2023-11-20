@@ -18,6 +18,7 @@ import { ResponderPqrsComponent } from './pagina/gestion-pqrs/responder-pqrs/res
 import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasena/olvidaste-contrasena.component';
 import { CancelarCitaComponent } from './pagina/paciente/cancelar-cita/cancelar-cita.component';
 import { AtenderCitaComponent } from './pagina/medico/atender-cita/atender-cita.component';
+import { DiaLibreComponent } from './pagina/medico/dia-libre/dia-libre.component';
 const routes: Routes = [
     { path: "", component: InicioComponent },
     { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
@@ -27,6 +28,11 @@ const routes: Routes = [
     {
         path: "cancelar-cita/:codigo", component: CancelarCitaComponent, canActivate: [RolesGuard], data: {
             expectedRole: ["PACIENTE"]
+        }
+    },
+    {
+        path: "dia-libre", component: DiaLibreComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["MEDICO"]
         }
     },
     {

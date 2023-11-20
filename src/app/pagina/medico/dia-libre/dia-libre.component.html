@@ -1,1 +1,23 @@
-<p>dia-libre works!</p>
+
+<div class="card">
+    <div class="card-header ps-5 pt-4 pb-4">
+      <h5 class="mb-0"><i class="fa-solid fa-calendar-alt me-3"></i>Registrar Día Libre</h5>
+    </div>
+    <div class="card-body p-5">
+      <form (ngSubmit)="registrarDiaLibre()" #registroDiaLibreForm="ngForm">
+        <div class="mb-3">
+          <label for="fecha" class="form-label">Fecha:</label>
+          <input type="date" id="fecha" name="fecha" [(ngModel)]="fechaSeleccionada" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="motivo" class="form-label">Motivo:</label>
+          <textarea id="motivo" name="motivo" [(ngModel)]="motivo" class="form-control" required></textarea>
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Registrar Día Libre</button>
+        </div>
+      </form>
+    </div>
+    <app-alerta [alerta]="alerta"></app-alerta>
+  </div>
+  
