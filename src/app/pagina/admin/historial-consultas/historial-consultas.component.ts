@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Alerta } from 'src/app/modelo/alerta';
 import { DetalleCitaDTO } from 'src/app/modelo/detalle-cita-dto';
 import { ItemCitaDTO } from 'src/app/modelo/item-cita-dto';
 import { CitaService } from 'src/app/servicios/cita.service';
+import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
   selector: 'app-historial-consultas',
@@ -13,6 +15,7 @@ export class HistorialConsultasComponent {
   citas: ItemCitaDTO[];
   codigoCita = 0;
   citaSeleccionada!: DetalleCitaDTO;
+  alerta!: Alerta;
 
   constructor(private citaService: CitaService, private route: ActivatedRoute) {
     this.citas = [];
@@ -20,7 +23,9 @@ export class HistorialConsultasComponent {
       this.codigoCita = params['codigo'];
     });
     this.obtenerCita(this.codigoCita);
+
   }
+ 
   //cargar el historial del paciente relacionado a esa cita
   public cargarHistorial(codigo: number) {
     this.citaService.listarHistorialPaciente(codigo).subscribe({
@@ -28,7 +33,7 @@ export class HistorialConsultasComponent {
         this.citas = data.respuesta;
       },
       error: error => {
-        console.log(error);
+        this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
       }
     });
   }
@@ -39,9 +44,11 @@ export class HistorialConsultasComponent {
         this.cargarHistorial(this.citaSeleccionada.codigoPaciente)
       },
       error: error => {
-        console.log(error);
+        this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
       }
     });
   }
+
+  
 
 }

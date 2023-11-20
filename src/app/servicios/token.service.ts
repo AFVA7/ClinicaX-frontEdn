@@ -28,6 +28,10 @@ export class TokenService {
     const roles = this.getRole();
     return roles.includes('ADMIN'); 
   }
+  public esPaciente(): boolean {
+    const roles = this.getRole();
+    return roles.includes('PACIENTE'); 
+  }
 
   public esMedico(): boolean {
     const roles = this.getRole();

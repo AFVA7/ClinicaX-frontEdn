@@ -33,6 +33,7 @@ import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasen
 import { ActualizarMedicoComponent } from './pagina/admin/gestiona-medicos/actualizar-medico/actualizar-medico.component';
 import { ListarMedicosComponent } from './pagina/admin/gestiona-medicos/listar-medicos/listar-medicos.component';
 import { DetalleMedicosComponent } from './pagina/admin/gestiona-medicos/detalle-medicos/detalle-medicos.component';
+import { HistorialDeAtencionesComponent } from './pagina/medico/historial-de-atenciones/historial-de-atenciones.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { DetalleMedicosComponent } from './pagina/admin/gestiona-medicos/detalle
     OlvidasteContrasenaComponent,
     ActualizarMedicoComponent,
     ListarMedicosComponent,
-    DetalleMedicosComponent
+    DetalleMedicosComponent,
+    HistorialDeAtencionesComponent
   ],
   imports: [
     HttpClientModule,

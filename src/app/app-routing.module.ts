@@ -23,6 +23,7 @@ import { HistorialConsultasComponent } from './pagina/admin/historial-consultas/
 import { ActualizarMedicoComponent } from './pagina/admin/gestiona-medicos/actualizar-medico/actualizar-medico.component';
 import { ListarMedicosComponent } from './pagina/admin/gestiona-medicos/listar-medicos/listar-medicos.component';
 import { DetalleMedicosComponent } from './pagina/admin/gestiona-medicos/detalle-medicos/detalle-medicos.component';
+import { HistorialDeAtencionesComponent } from './pagina/medico/historial-de-atenciones/historial-de-atenciones.component';
 const routes: Routes = [
     
     { path: "", component: InicioComponent },
@@ -30,6 +31,11 @@ const routes: Routes = [
     { path: "registro", component: RegistroComponent, canActivate: [LoginGuard] },
     { path: "detalle/:id", component: RegistroComponent },
     { path: "olvidaste-contrasena", component: OlvidasteContrasenaComponent },
+    {
+        path: "historial-de-atenciones", component: HistorialDeAtencionesComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["MEDICO"]
+        }
+    },
     {
         path: "actualizar-medico/:codigo", component: ActualizarMedicoComponent, canActivate: [RolesGuard], data: {
             expectedRole: ["ADMIN"]

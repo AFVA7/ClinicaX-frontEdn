@@ -18,6 +18,10 @@ export class MedicoService {
   registrarDiaLibre(datos: DiaLibreDTO): Observable<MensajeDTO> {
     return this.http.post<MensajeDTO>(`${this.medicoURL}/agendar-dia-libre`, datos);
   }
+
+  public historialDeAtencionesDeUnMedico(codigo: number): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.medicoURL}/listar-atenciones/${codigo}`);
+  }
   
   
 }
