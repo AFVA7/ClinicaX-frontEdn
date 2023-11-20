@@ -8,9 +8,12 @@
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Foto: </label>
                 <div class="col-sm-8">
+                    <div class="rounded-image-container">
+                        <img [src]="registroMedicoDTO.urlFoto" alt="Foto actual" class="img-fluid rounded-image" />
+                    </div>
                     <input type="file" class="form-control" name="foto" required (change)="onFileChange($event)" />
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-2 d-flex align-items-center">
                     <button type="submit" [disabled]="archivos == null" class="btn btn-primary" (click)="subirImagen()">
                         <i class="fa-solid fa-cloud-arrow-up me-2"></i>Subir Foto
                     </button>

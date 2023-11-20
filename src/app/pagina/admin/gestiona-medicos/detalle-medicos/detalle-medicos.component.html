@@ -1,0 +1,43 @@
+<div class="card">
+    <div class="card-header ps-5 pt-4 pb-4">
+        <h5 class="mb-0"><i class="fa-solid fa-user me-3"></i>Detalle del Médico</h5>
+    </div>
+    <div class="card-body p-5">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <img *ngIf="detalleMedico.urlFoto" [src]="detalleMedico.urlFoto" alt="Foto del Médico" class="img-fluid rounded-circle" style="max-width: 150px; max-height: 150px;">
+            </div>
+            <div class="col-md-8">
+                <h4>{{ detalleMedico.nombre }}</h4>
+                <p><strong>Código:</strong> {{ detalleMedico.codigo }}</p>
+                <p><strong>Cédula:</strong> {{ detalleMedico.cedula }}</p>
+                <p><strong>Ciudad:</strong> {{ detalleMedico.ciudad }}</p>
+                <p><strong>Especialidad:</strong> {{ detalleMedico.especialidad }}</p>
+                <p><strong>Teléfono:</strong> {{ detalleMedico.telefono }}</p>
+                <p><strong>Correo:</strong> {{ detalleMedico.correo }}</p>
+            </div>
+        </div>
+
+        <h5>Horarios:</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let horario of detalleMedico.horarios">
+                    <td>{{ horario.dia }}</td>
+                    <td>{{ horario.horaInicio }}</td>
+                    <td>{{ horario.horaFin }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a [routerLink]="['/actualizar-medico', detalleMedico.codigo]" class="btn btn-primary">
+            <i class="fa-solid fa-pencil me-2"></i>Actualizar Médico
+        </a>
+    </div>
+</div>
+<app-alerta [alerta]="alerta"></app-alerta>

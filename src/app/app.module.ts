@@ -30,6 +30,9 @@ import { UsuarioInterceptor } from './interceptor/usuario.interceptor';
 import { EditarPerfilComponent } from './pagina/editar-perfil/editar-perfil.component';
 import { ResponderPqrsComponent } from './pagina/gestion-pqrs/responder-pqrs/responder-pqrs.component';
 import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasena/olvidaste-contrasena.component';
+import { ActualizarMedicoComponent } from './pagina/admin/gestiona-medicos/actualizar-medico/actualizar-medico.component';
+import { ListarMedicosComponent } from './pagina/admin/gestiona-medicos/listar-medicos/listar-medicos.component';
+import { DetalleMedicosComponent } from './pagina/admin/gestiona-medicos/detalle-medicos/detalle-medicos.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasen
     AlertaComponent,
     EditarPerfilComponent,
     ResponderPqrsComponent,
-    OlvidasteContrasenaComponent
+    OlvidasteContrasenaComponent,
+    ActualizarMedicoComponent,
+    ListarMedicosComponent,
+    DetalleMedicosComponent
   ],
   imports: [
     HttpClientModule,

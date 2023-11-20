@@ -15,9 +15,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="gestionMedicosDropdown">
             <li><a routerLink="/crear-medico" class="dropdown-item">Crear Médico</a></li>
-            <li><a routerLink="/editar-medico" class="dropdown-item">Editar Médico</a></li>
-            <li><a routerLink="/eliminar-medico" class="dropdown-item">Eliminar Médico</a></li>
-            <li><a routerLink="/buscar-medico" class="dropdown-item">Buscar Médico</a></li>
+            <li><a routerLink="/listar-medicos" class="dropdown-item">Listar Médicos</a></li>
           </ul>
         </li>
         <li *ngIf="isLogged && rol.includes('PACIENTE') || rol.includes('ADMIN')"><a routerLink="/gestion-pqrs" class="nav-link px-2 text-white">Gestión PQRS</a></li>

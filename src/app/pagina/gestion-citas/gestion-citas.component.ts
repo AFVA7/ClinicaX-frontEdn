@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Alerta } from 'src/app/modelo/alerta';
 import { ItemCitaDTO } from 'src/app/modelo/item-cita-dto';
 import { CitaService } from 'src/app/servicios/cita.service';
 import { TokenService } from 'src/app/servicios/token.service';
@@ -10,6 +11,7 @@ import { TokenService } from 'src/app/servicios/token.service';
 })
 export class GestionCitasComponent {
   codigoPaciente: number;
+  alerta!: Alerta
   codigoMedico: number;
   citas: ItemCitaDTO[];
   mostrarSoloPendientes: boolean = false;
@@ -37,7 +39,7 @@ export class GestionCitasComponent {
         this.citas = data.respuesta;
       },
       error: error => {
-        console.log(error);
+        this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
       }
     });
   }
@@ -65,7 +67,7 @@ export class GestionCitasComponent {
         this.citas = data.respuesta;
       },
       error: error => {
-        console.log(error);
+        this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
       }
     });
   }
@@ -76,7 +78,7 @@ export class GestionCitasComponent {
         this.citas = data.respuesta;
       },
       error: error => {
-        console.log(error);
+        this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
       }
     });
   }

@@ -1,0 +1,83 @@
+<div class="card">
+    <div class="card-header ps-5 pt-4 pb-4">
+        <h5 class="mb-0"><i class="fa-solid fa-pencil me-3"></i>Actualizar Médico</h5>
+    </div>
+    <div class="card-body p-5">
+        <form #f="ngForm">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="detalleMedico.nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="cedula" class="form-label">Cédula:</label>
+                <input type="text" class="form-control" id="cedula" name="cedula" [(ngModel)]="detalleMedico.cedula" required>
+            </div>
+            <div class="mb-3">
+                <label for="ciudad" class="form-label">Ciudad:</label>
+                <input type="text" class="form-control" id="ciudad" name="ciudad" [(ngModel)]="detalleMedico.ciudad" required>
+            </div>
+            <div class="mb-3">
+                <label for="especialidad" class="form-label">Especialidad:</label>
+                <input type="text" class="form-control" id="especialidad" name="especialidad" [(ngModel)]="detalleMedico.especialidad" required>
+            </div>
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono:</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="detalleMedico.telefono" required>
+            </div>
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo:</label>
+                <input type="email" class="form-control" id="correo" name="correo" [(ngModel)]="detalleMedico.correo" required>
+            </div>
+            <div class="mb-3">
+                <label for="foto" class="form-label">Foto Actual:</label>
+                <img *ngIf="detalleMedico.urlFoto" [src]="detalleMedico.urlFoto" alt="Foto del Médico" class="img-fluid rounded-circle" style="max-width: 150px; max-height: 150px;">
+            </div>
+            <div class="mb-3">
+                <label for="foto" class="form-label">Seleccionar Nueva Foto:</label>
+                <input type="file" class="form-control" id="foto" name="foto" (change)="onFileChange($event)">
+            </div>
+
+            <h5>Horarios:</h5>
+            <div *ngFor="let horario of detalleMedico.horarios; let i = index" class="row mb-3">
+                <div class="col-md-4">
+                    <label for="dia{{i}}" class="form-label">Día:</label>
+                    <input type="text" class="form-control" id="dia{{i}}" name="dia{{i}}" [(ngModel)]="detalleMedico.horarios[i].dia" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="horaInicio{{i}}" class="form-label">Hora de Inicio:</label>
+                    <input type="text" class="form-control" id="horaInicio{{i}}" name="horaInicio{{i}}" [(ngModel)]="detalleMedico.horarios[i].horaInicio" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="horaFin{{i}}" class="form-label">Hora de Fin:</label>
+                    <input type="text" class="form-control" id="horaFin{{i}}" name="horaFin{{i}}" [(ngModel)]="detalleMedico.horarios[i].horaFin" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="actualizarMedico()">
+                <i class="fa-solid fa-check me-2"></i>Actualizar Médico
+            </button>
+             <!-- Botón para eliminar al médico -->
+             <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#eliminarMedicoModal">
+                <i class="fa-solid fa-trash me-2"></i>Eliminar Médico
+            </button>
+        </form>
+    </div>
+</div>
+<!-- Modal de confirmación para eliminar al médico -->
+<div class="modal fade" id="eliminarMedicoModal" tabindex="-1" aria-labelledby="eliminarMedicoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eliminarMedicoModalLabel">Eliminar Médico</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar a este médico?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarMedico()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<app-alerta [alerta]="alerta"></app-alerta>

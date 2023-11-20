@@ -33,9 +33,12 @@
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Foto: </label>
                 <div class="col-sm-8">
+                    <div class="rounded-image-container">
+                        <img [src]="registroPacienteDTO.urlFoto" alt="Foto actual" class="img-fluid rounded-image" />
+                    </div>
                     <input type="file" class="form-control" name="foto" required (change)="onFileChange($event)" />
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-2 d-flex align-items-center">
                     <button type="submit" [disabled]="archivos == null" class="btn btn-primary" (click)="subirImagen()">
                         <i class="fa-solid fa-cloud-arrow-up me-2"></i>Subir Foto
                     </button>
@@ -118,7 +121,8 @@
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="!sonIguales()">Las contraseñas no
                     coinciden</div>
-                <button class="btn btn-primary" type="submit" [disabled]="f.invalid || !sonIguales()" (click)="registrar()" >
+                <button class="btn btn-primary" type="submit" [disabled]="f.invalid || !sonIguales()"
+                    (click)="registrar()">
                     <i class="fa-solid fa-circle-plus me-1"></i>Registrarse
                 </button>
                 <app-alerta [alerta]="alerta"></app-alerta>

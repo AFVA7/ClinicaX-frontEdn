@@ -20,6 +20,9 @@ import { CancelarCitaComponent } from './pagina/paciente/cancelar-cita/cancelar-
 import { AtenderCitaComponent } from './pagina/medico/atender-cita/atender-cita.component';
 import { DiaLibreComponent } from './pagina/medico/dia-libre/dia-libre.component';
 import { HistorialConsultasComponent } from './pagina/admin/historial-consultas/historial-consultas.component';
+import { ActualizarMedicoComponent } from './pagina/admin/gestiona-medicos/actualizar-medico/actualizar-medico.component';
+import { ListarMedicosComponent } from './pagina/admin/gestiona-medicos/listar-medicos/listar-medicos.component';
+import { DetalleMedicosComponent } from './pagina/admin/gestiona-medicos/detalle-medicos/detalle-medicos.component';
 const routes: Routes = [
     
     { path: "", component: InicioComponent },
@@ -27,6 +30,21 @@ const routes: Routes = [
     { path: "registro", component: RegistroComponent, canActivate: [LoginGuard] },
     { path: "detalle/:id", component: RegistroComponent },
     { path: "olvidaste-contrasena", component: OlvidasteContrasenaComponent },
+    {
+        path: "actualizar-medico/:codigo", component: ActualizarMedicoComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["ADMIN"]
+        }
+    },
+    {
+        path: "listar-medicos", component: ListarMedicosComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["ADMIN"]
+        }
+    },
+    {
+        path: "detalle-medico/:codigo", component: DetalleMedicosComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["ADMIN"]
+        }
+    },
     {
         path: "cancelar-cita/:codigo", component: CancelarCitaComponent, canActivate: [RolesGuard], data: {
             expectedRole: ["PACIENTE"]
