@@ -19,13 +19,24 @@ import { OlvidasteContrasenaComponent } from './pagina/login/olvidaste-contrasen
 import { CancelarCitaComponent } from './pagina/paciente/cancelar-cita/cancelar-cita.component';
 import { AtenderCitaComponent } from './pagina/medico/atender-cita/atender-cita.component';
 import { DiaLibreComponent } from './pagina/medico/dia-libre/dia-libre.component';
+import { HistorialConsultasComponent } from './pagina/admin/historial-consultas/historial-consultas.component';
 const routes: Routes = [
+    
     { path: "", component: InicioComponent },
     { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
     { path: "registro", component: RegistroComponent, canActivate: [LoginGuard] },
     { path: "detalle/:id", component: RegistroComponent },
     { path: "olvidaste-contrasena", component: OlvidasteContrasenaComponent },
     {
+        path: "cancelar-cita/:codigo", component: CancelarCitaComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["PACIENTE"]
+        }
+    },
+    {
+        path: "historial-medico/:codigo", component: HistorialConsultasComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["MEDICO"]
+        }
+    },{
         path: "cancelar-cita/:codigo", component: CancelarCitaComponent, canActivate: [RolesGuard], data: {
             expectedRole: ["PACIENTE"]
         }

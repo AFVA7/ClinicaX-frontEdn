@@ -1,5 +1,6 @@
 export interface DetalleCitaDTO {
     codigoCita: number;
+    codigoPaciente: number;
     nombrePaciente: string;
     nombreMedico: string;
     especialidad: string;

@@ -1,1 +1,39 @@
-<p>historial-consultas works!</p>
+<div class="card">
+    <div class="card-header ps-5 pt-4 pb-4">
+      <h5 class="mb-0"><i class="fa-solid fa-comments me-3"></i>Historial de Consultas</h5>
+    </div>
+    <div class="card-body p-5">
+      <!-- Información del Paciente -->
+      <div class="mb-3" *ngIf="citaSeleccionada">
+        <h6 class="patient-name">Historial del Paciente: {{ citaSeleccionada.nombrePaciente }}</h6>
+      </div>
+  
+      <!-- Lista de Consultas -->
+      <div *ngIf="citas.length > 0">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nombre del Médico</th>
+              <th>Estado de la Cita</th>
+              <th>Fecha de la Cita</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let consulta of citas">
+              <td>{{ consulta.codigo }}</td>
+              <td>{{ consulta.nombreMedico }}</td>
+              <td>{{ consulta.estadoCita }}</td>
+              <td>{{ consulta.fecha }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Mensaje si no hay consultas en el historial -->
+      <div *ngIf="citas.length === 0">
+        <p>No hay consultas en el historial.</p>
+      </div>
+    </div>
+  </div>
+  

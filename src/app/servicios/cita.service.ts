@@ -43,6 +43,10 @@ export class CitaService {
     return this.http.post<MensajeDTO>(`${this.citaURL}/cancelar`, datos);
   }
 
+  public listarHistorialPaciente(codigo: number): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.citaURL}/listar-historial/${codigo}`);
+  }
+
   formatLocalDateTime(fecha: string, hora: string): string {
     // Combina la fecha y la hora para crear un string en formato 'yyyy-MM-ddTHH:mm'
     const fechaHoraString = `${fecha}T${hora}`;

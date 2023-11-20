@@ -18,12 +18,14 @@ export class AtenderCitaComponent {
   citaSeleccionada!: DetalleCitaDTO;
   registroAtencionDTO: RegistroAtencionDTO = new RegistroAtencionDTO();
   codigoMedico: number = 0;
+  
   constructor(private route: ActivatedRoute, private citaService: CitaService, private tokenService: TokenService, private medicoService: MedicoService) {
     this.route.params.subscribe(params => {
       this.codigoCita = params['codigo'];
     });
     this.codigoMedico = this.tokenService.getCodigo();
     this.obtenerCita(this.codigoCita);
+    
   }
 
   public obtenerCita(codigo: number) {

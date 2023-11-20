@@ -42,6 +42,11 @@
       <!-- Botón para Atender Cita -->
       <button type="button" class="btn btn-primary" (click)="atenderCita()">Atender Cita</button>
     </div>
+    <div class="mt-3" *ngIf="citaSeleccionada">
+      <a routerLink="/historial-medico/{{ citaSeleccionada.codigoCita}}" class="btn btn-info">
+        Ver Historial Médico del Paciente
+      </a>
+    </div>
     <app-alerta [alerta]="alerta"></app-alerta>
   </div>
   

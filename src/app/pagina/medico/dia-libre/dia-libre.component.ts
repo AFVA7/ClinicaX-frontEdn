@@ -24,7 +24,6 @@ export class DiaLibreComponent {
 
   registrarDiaLibre() {
     this.setearDatos();
-    console.log(this.diaLibreDTO);
     this.MedicoService.registrarDiaLibre(this.diaLibreDTO).subscribe({
       next: data => {
         this.alerta = { mensaje: data.respuesta, tipo: "success" };
