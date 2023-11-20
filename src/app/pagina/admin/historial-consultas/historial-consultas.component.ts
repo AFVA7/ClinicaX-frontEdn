@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Alerta } from 'src/app/modelo/alerta';
+import { DetalleAtencionDTO } from 'src/app/modelo/detalle-atencion-dto';
 import { DetalleCitaDTO } from 'src/app/modelo/detalle-cita-dto';
 import { ItemCitaDTO } from 'src/app/modelo/item-cita-dto';
 import { CitaService } from 'src/app/servicios/cita.service';
+import { PacienteService } from 'src/app/servicios/paciente.service';
 import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
@@ -16,15 +18,32 @@ export class HistorialConsultasComponent {
   codigoCita = 0;
   citaSeleccionada!: DetalleCitaDTO;
   alerta!: Alerta;
+  codigoPaciente: number = 0; 
+  detalleAtencion!: DetalleAtencionDTO;
 
-  constructor(private citaService: CitaService, private route: ActivatedRoute) {
+  constructor(private citaService: CitaService, private route: ActivatedRoute, private tokenService: TokenService, private pacienteService: PacienteService) {
     this.citas = [];
     this.route.params.subscribe(params => {
       this.codigoCita = params['codigo'];
     });
-    this.obtenerCita(this.codigoCita);
+    //this.obtenerCita(this.codigoCita);
+    this.codigoPaciente = this.tokenService.getCodigo();
+    this.cargarHistorial(this.codigoPaciente);
 
   }
+
+  public verDetalleAtencion(codigo: number){
+    this.pacienteService.verDetalleAtencion(codigo).subscribe({
+      next: data => {
+        this.detalleAtencion = data.respuesta;
+      },
+      error: error => {
+        this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
+      }
+    });
+  }
+
+  
  
   //cargar el historial del paciente relacionado a esa cita
   public cargarHistorial(codigo: number) {

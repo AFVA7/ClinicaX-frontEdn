@@ -27,4 +27,7 @@ export class PacienteService {
   public listarPQRSPaciente(codigoPaciente: number): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.userUrl}/listar-pqrs/${codigoPaciente}`);
   }
+  public verDetalleAtencion(codigoPaciente: number): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.userUrl}/ver-detalle-atencion/${codigoPaciente}`);
+  }
 }

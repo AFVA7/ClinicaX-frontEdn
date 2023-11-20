@@ -15,6 +15,7 @@ export class DiaLibreComponent {
   codigoMedico: number = 0;
   alerta!: Alerta;
   diaLibreDTO: DiaLibreDTO = new DiaLibreDTO();
+  detalleDiaLibreDTO: DiaLibreDTO = new DiaLibreDTO();
 
   constructor(private MedicoService: MedicoService, private tokenService: TokenService) {
     this.fechaSeleccionada = '';
@@ -27,6 +28,18 @@ export class DiaLibreComponent {
     this.MedicoService.registrarDiaLibre(this.diaLibreDTO).subscribe({
       next: data => {
         this.alerta = { mensaje: data.respuesta, tipo: "success" };
+      },
+      error: error => {
+        this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
+      }
+    });
+  }
+
+  obtenerDiaLibre() {
+    this.MedicoService.obtenerDiaLibre(this.codigoMedico).subscribe({
+      next: data => {
+        this.detalleDiaLibreDTO = data.respuesta;
+        console.log(this.detalleDiaLibreDTO)
       },
       error: error => {
         this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };

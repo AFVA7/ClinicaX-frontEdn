@@ -10,6 +10,7 @@ import { DiaLibreDTO } from '../modelo/dia-libre-dto';
 })
 export class MedicoService {
   private medicoURL = "http://localhost:8080/api/medicos";
+  private DiaLibreURL = "http://localhost:8080/api/dia-libre";
   constructor(private http: HttpClient) { }
 
   atenderCita(datos: RegistroAtencionDTO): Observable<MensajeDTO> {
@@ -22,6 +23,12 @@ export class MedicoService {
   public historialDeAtencionesDeUnMedico(codigo: number): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.medicoURL}/listar-atenciones/${codigo}`);
   }
+
+  public obtenerDiaLibre(codigo: number): Observable<MensajeDTO>{
+    return this.http.get<MensajeDTO>(`${this.DiaLibreURL}/detalle/${codigo}`);
+  }
+  
+
   
   
 }

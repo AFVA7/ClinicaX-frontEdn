@@ -32,6 +32,11 @@ const routes: Routes = [
     { path: "detalle/:id", component: RegistroComponent },
     { path: "olvidaste-contrasena", component: OlvidasteContrasenaComponent },
     {
+        path: "historial-consultas", component: HistorialConsultasComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["PACIENTE"]
+        }
+    },
+    {
         path: "historial-de-atenciones", component: HistorialDeAtencionesComponent, canActivate: [RolesGuard], data: {
             expectedRole: ["MEDICO"]
         }
