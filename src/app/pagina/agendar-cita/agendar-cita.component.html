@@ -28,18 +28,25 @@
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Disponibilidad: </label>
                 <div class="col-sm-10">
-                    <select name="horario" class="form-select" [(ngModel)]="agendarCitaDTO.fecha">
-                        <option value="" selected>Disponibilidad</option>
-                        <!-- <ng-container *ngFor="let medicoHorarios of horariosDisponibles"> -->
-                            <ng-container *ngFor="let horario of horariosMedicoSeleccionado">
-                                <option [value]="horario.dia + ' ' + horario.horaInicio + ' - ' + horario.horaFin">
-                                    {{ horario.dia + ' ' + horario.horaInicio + ' - ' + horario.horaFin }}
-                                </option>
-                            </ng-container>
-                        <!-- </ng-container> -->
-                    </select>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Día</th>
+                                <th>Hora Inicio</th>
+                                <th>Hora Fin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let horario of horariosMedicoSeleccionado">
+                                <td>{{ horario.dia }}</td>
+                                <td>{{ horario.horaInicio }}</td>
+                                <td>{{ horario.horaFin }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            
 
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Fecha: </label>

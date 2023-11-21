@@ -18,7 +18,6 @@ export class AgendarCitaComponent {
   agendarCitaDTO2: AgendarCitaDTO2;
   medico!: ItemMedicoDTO;
   especialidades: string[];
-  //medicos: { codigo: number, nombre: string }[];
   medicos: ItemMedicoDTO[];
   horariosDisponibles: HorarioDTO[][] = [];
   alerta!: Alerta;
@@ -28,7 +27,6 @@ export class AgendarCitaComponent {
   constructor(private citaService: CitaService, private clinicaService: ClinicaService, private tokenService: TokenService) {
     this.especialidades = [];
     this.medicos = [];
-    this.cargarMedicos();
     this.agendarCitaDTO = new AgendarCitaDTO();
     this.agendarCitaDTO2 = new AgendarCitaDTO2();
     this.cargarEspecialidad();
@@ -36,7 +34,6 @@ export class AgendarCitaComponent {
   }
 
   public obtenerMedicosPorEspecialidad(especialidad: string) {
-    console.log(especialidad);
     if (especialidad) {
       this.clinicaService.obtenerMedicosPorEspecialidad(especialidad).subscribe({
         next: data => {
@@ -44,20 +41,22 @@ export class AgendarCitaComponent {
         },
         error: error => {
           this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
+          this.medicos = [];
+          this.horariosMedicoSeleccionado = [];
         }
       });
     }
   }
 
   public obtenerHorariosMedico(codigo: number){
-      for(const medico of this.medicos){
-        if (medico.codigo == this.agendarCitaDTO.idMedico){
-          this.medico = medico
-          break;
-        }
-      }
+    const medicoSeleccionado = this.medicos.find(medico => medico.codigo === codigo);
+    if (medicoSeleccionado) {
+      this.medico = medicoSeleccionado;
       this.horariosMedicoSeleccionado = this.medico.horarios;
-      console.log(this.horariosMedicoSeleccionado)
+  } else {
+      console.error('No se encontró ningún médico con el código especificado');
+      this.horariosMedicoSeleccionado = [];
+  }
   }
 
 
