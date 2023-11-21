@@ -42,6 +42,7 @@ export class AtenderCitaComponent {
   public atenderCita() {
     this.registroAtencionDTO.codigoCita = this.codigoCita;
     this.registroAtencionDTO.codigoMedico = this.codigoMedico;
+    console.log(this.registroAtencionDTO)
     this.medicoService.atenderCita(this.registroAtencionDTO).subscribe({
       next: data => {
         this.alerta = { mensaje: data.respuesta, tipo: "success" };

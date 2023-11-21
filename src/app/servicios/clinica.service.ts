@@ -30,6 +30,7 @@ export class ClinicaService {
   public listarMotivosDeCancelamiento(): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.clinicaURL}/listar-motivos-cancelamiento`);
   }
-
-  
+  public obtenerMedicosPorEspecialidad(especialidad: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.clinicaURL}/listar-medicos/${especialidad}`);
+  }
 }

@@ -5,6 +5,8 @@ import { ClinicaService } from 'src/app/servicios/clinica.service';
 import { Alerta } from 'src/app/modelo/alerta';
 import { TokenService } from 'src/app/servicios/token.service';
 import { AgendarCitaDTO2 } from 'src/app/modelo/agendar-cita-dto2';
+import { HorarioDTO } from 'src/app/modelo/horario-dto';
+import { ItemMedicoDTO } from 'src/app/modelo/item-medico-dto';
 
 @Component({
   selector: 'app-agendar-cita',
@@ -14,10 +16,14 @@ import { AgendarCitaDTO2 } from 'src/app/modelo/agendar-cita-dto2';
 export class AgendarCitaComponent {
   agendarCitaDTO: AgendarCitaDTO;
   agendarCitaDTO2: AgendarCitaDTO2;
+  medico!: ItemMedicoDTO;
   especialidades: string[];
-  medicos: { codigo: number, nombre: string }[];
+  //medicos: { codigo: number, nombre: string }[];
+  medicos: ItemMedicoDTO[];
+  horariosDisponibles: HorarioDTO[][] = [];
   alerta!: Alerta;
   codigoPaciente: number;
+  horariosMedicoSeleccionado: HorarioDTO[] = [];
 
   constructor(private citaService: CitaService, private clinicaService: ClinicaService, private tokenService: TokenService) {
     this.especialidades = [];
@@ -29,8 +35,37 @@ export class AgendarCitaComponent {
     this.codigoPaciente = this.tokenService.getCodigo();
   }
 
+  public obtenerMedicosPorEspecialidad(especialidad: string) {
+    console.log(especialidad);
+    if (especialidad) {
+      this.clinicaService.obtenerMedicosPorEspecialidad(especialidad).subscribe({
+        next: data => {
+          this.medicos = data.respuesta;
+        },
+        error: error => {
+          this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
+        }
+      });
+    }
+  }
+
+  public obtenerHorariosMedico(codigo: number){
+      for(const medico of this.medicos){
+        if (medico.codigo == this.agendarCitaDTO.idMedico){
+          this.medico = medico
+          break;
+        }
+      }
+      this.horariosMedicoSeleccionado = this.medico.horarios;
+      console.log(this.horariosMedicoSeleccionado)
+  }
+
+
   public agendarCita() {
+    alert("agendando, espere...")
     this.setearDatos();
+    const fechaActual = new Date()
+
     this.citaService.agendarCita(this.agendarCitaDTO2).subscribe({
       next: data => {
         this.alerta = { mensaje: data.respuesta, tipo: "success" };
@@ -46,7 +81,7 @@ export class AgendarCitaComponent {
         this.especialidades = data.respuesta;
       },
       error: error => {
-        console.log(error);
+        this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
       }
     });
   }
@@ -60,16 +95,15 @@ export class AgendarCitaComponent {
         }));
       },
       error: error => {
-        console.log(error);
+        this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
       }
     });
   }
 
+
   public setearDatos() {
     // Formatea la fecha antes de asignarla a agendarCitaDTO
     console.log(this.agendarCitaDTO.fecha);
-    console.log(this.agendarCitaDTO.hora);
-    console.log(this.agendarCitaDTO2.fecha);
     const formattedFechaHora = this.citaService.formatLocalDateTime(
       this.agendarCitaDTO.fecha,
       this.agendarCitaDTO.hora
@@ -78,6 +112,7 @@ export class AgendarCitaComponent {
     this.agendarCitaDTO2.motivo = this.agendarCitaDTO.motivo;
     this.agendarCitaDTO2.idMedico = this.agendarCitaDTO.idMedico;
     this.agendarCitaDTO2.fecha = formattedFechaHora;
+
     this.agendarCitaDTO2.idPaciente = this.codigoPaciente;
   }
 }

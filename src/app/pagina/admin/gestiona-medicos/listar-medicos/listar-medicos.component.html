@@ -7,7 +7,6 @@
         <tr>
           <th>Código</th>
           <th>Nombre</th>
-          <th>Cédula</th>
           <th>Especialidad</th>
           <th>Foto</th>
           <th>Acciones</th>
@@ -18,7 +17,6 @@
         <tr *ngFor="let medico of listaMedicos">
           <td>{{ medico.codigo }}</td>
           <td>{{ medico.nombre }}</td>
-          <td>{{ medico.cedula }}</td>
           <td>{{ medico.especialidad }}</td>
           <!-- Si tienes la URL de la foto, puedes usar la etiqueta img -->
           <td>

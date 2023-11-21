@@ -4,6 +4,7 @@ import { Alerta } from 'src/app/modelo/alerta';
 import { DetalleAtencionDTO } from 'src/app/modelo/detalle-atencion-dto';
 import { DetalleCitaDTO } from 'src/app/modelo/detalle-cita-dto';
 import { ItemCitaDTO } from 'src/app/modelo/item-cita-dto';
+import { AtencionesService } from 'src/app/servicios/atenciones.service';
 import { CitaService } from 'src/app/servicios/cita.service';
 import { PacienteService } from 'src/app/servicios/paciente.service';
 import { TokenService } from 'src/app/servicios/token.service';
@@ -20,20 +21,29 @@ export class HistorialConsultasComponent {
   alerta!: Alerta;
   codigoPaciente: number = 0; 
   detalleAtencion!: DetalleAtencionDTO;
+  esMedico: boolean = false;
 
-  constructor(private citaService: CitaService, private route: ActivatedRoute, private tokenService: TokenService, private pacienteService: PacienteService) {
+  constructor(private citaService: CitaService, private route: ActivatedRoute, private tokenService: TokenService, private pacienteService: PacienteService, private atencionService: AtencionesService) {
     this.citas = [];
     this.route.params.subscribe(params => {
       this.codigoCita = params['codigo'];
     });
-    //this.obtenerCita(this.codigoCita);
     this.codigoPaciente = this.tokenService.getCodigo();
-    this.cargarHistorial(this.codigoPaciente);
+    
 
   }
 
+  ngOnInit(): void {
+    this.esMedico = this.tokenService.esMedico();
+    if (this.esMedico) {
+      this.obtenerCita(this.codigoCita);
+    }else{
+      this.cargarHistorial(this.codigoPaciente);
+    }
+  }
+
   public verDetalleAtencion(codigo: number){
-    this.pacienteService.verDetalleAtencion(codigo).subscribe({
+    this.atencionService.verDetalleAtencion(codigo).subscribe({
       next: data => {
         this.detalleAtencion = data.respuesta;
       },
@@ -42,9 +52,6 @@ export class HistorialConsultasComponent {
       }
     });
   }
-
-  
- 
   //cargar el historial del paciente relacionado a esa cita
   public cargarHistorial(codigo: number) {
     this.citaService.listarHistorialPaciente(codigo).subscribe({
