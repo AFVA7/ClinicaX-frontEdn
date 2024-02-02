@@ -43,7 +43,7 @@ export class HistorialConsultasComponent {
   }
 
   public verDetalleAtencion(codigo: number){
-    this.atencionService.verDetalleAtencion(codigo).subscribe({
+    this.atencionService.verDetalleAtencionRelacionadoACita(codigo).subscribe({
       next: data => {
         this.detalleAtencion = data.respuesta;
       },

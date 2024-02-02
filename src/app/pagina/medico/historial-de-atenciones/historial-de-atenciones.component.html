@@ -20,6 +20,10 @@
               <td>{{ atencion.nombrePaciente }}</td>
               <td>{{ atencion.especialidad }}</td>
               <td>{{ atencion.fechaAtencion }}</td>
+              <td>
+                <button class="btn btn-info btn-sm" (click)="verDetalleAtencion(atencion.codigo)">
+                  Ver Detalle
+                </button>
             </tr>
           </tbody>
         </table>
@@ -29,6 +33,21 @@
       <div *ngIf="atenciones.length === 0">
         <p>No hay atenciones en el historial.</p>
       </div>
+      
+      <!-- Sección para mostrar el detalle de la atención -->
+    <div *ngIf="detalleAtencion">
+      <h5>Detalle de la Atención:</h5>
+      <p><strong>Código De Atención:</strong> {{ detalleAtencion.codigo }}</p>
+      <p><strong>Fecha de Atención:</strong> {{ detalleAtencion.fechaAtencion }}</p>
+      <p><strong>Nombre del Paciente:</strong> {{ detalleAtencion.nombrePaciente }}</p>
+      <p><strong>Nombre del Médico:</strong> {{ detalleAtencion.nombreMedico }}</p>
+      <p><strong>Especialidad:</strong> {{ detalleAtencion.especialidad }}</p>
+      <p><strong>Tratamiento:</strong> {{ detalleAtencion.tratamiento }}</p>
+      <p><strong>Notas Medicas:</strong> {{ detalleAtencion.notasMedicas }}</p>
+      <p><strong>Diagnóstico:</strong> {{ detalleAtencion.diagnostico}}</p>
+      <p></p>
+    </div>
+      <app-alerta [alerta]="alerta"></app-alerta>
     </div>
   </div>
   

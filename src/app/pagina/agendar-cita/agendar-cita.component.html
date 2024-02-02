@@ -52,8 +52,9 @@
                 <label class="col-sm-2 col-form-label">Fecha: </label>
                 <div class="col-sm-10">
                     <input #fecha="ngModel"
-                        [ngClass]="fecha.invalid && (fecha.dirty || fecha.touched) ? 'is-invalid' : ''" type="date"
-                        name="fecha" class="form-control" required [(ngModel)]="agendarCitaDTO.fecha" />
+                        [ngClass]="fecha.invalid && (fecha.dirty || fecha.touched) ? 'is-invalid' : ''"
+                        type="date" name="fecha" class="form-control" required
+                        [(ngModel)]="agendarCitaDTO.fecha" [min]="getFechaActual()">
                 </div>
             </div>
             <div class="mb-3 row">

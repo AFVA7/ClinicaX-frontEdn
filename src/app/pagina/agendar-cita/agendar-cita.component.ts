@@ -74,6 +74,14 @@ export class AgendarCitaComponent {
       }
     });
   }
+  getFechaActual(): string {
+    const today = new Date();
+    // Formatea la fecha como "YYYY-MM-DD"
+    const formattedDate = today.toISOString().split('T')[0];
+    return formattedDate;
+  }
+  
+
   public cargarEspecialidad() {
     this.clinicaService.listarEspecialidades().subscribe({
       next: data => {

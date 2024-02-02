@@ -11,7 +11,11 @@ export class AtencionesService {
 
   constructor(private http: HttpClient) { }
 
-  public verDetalleAtencion(codigoPaciente: number): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.atencionUrl}/detalle/${codigoPaciente}`);
+  public verDetalleAtencionRelacionadoACita(codigoPaciente: number): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.atencionUrl}/detalleRelacionadoACita/${codigoPaciente}`);
+  }
+
+  public verDetalleAtencion(codigo: number): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.atencionUrl}/detalle/${codigo}`);
   }
 }

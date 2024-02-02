@@ -68,7 +68,7 @@ export class CrearPqrsComponent {
         }));
       },
       error: error => {
-        console.log(error);
+        this.alerta = { mensaje: error.error.respuesta, tipo: "danger" };
       }
     });
   }

@@ -28,7 +28,8 @@
                         </thead>
                         <tbody class="table-group-divider">
                             <tr *ngFor="let cita of citas">
-                                <td><input class="form-check-input" type="checkbox" (change)="seleccionar(cita.codigo)" /></td>
+                                <!-- tyoe: checkbox permite múltiples selecciones -->
+                                <td><input class="form-check-input" type="radio" name="citaSeleccionada" (change)="seleccionar(cita.codigo)" /></td>
                                 <td>
                                     <p>{{cita.codigo}}</p>
                                 </td>

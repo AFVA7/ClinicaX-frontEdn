@@ -13,7 +13,7 @@
       <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th>Código</th>
+            <th>Código De Cita</th>
             <th>Nombre del Médico</th>
             <th>Estado de la Cita</th>
             <th>Fecha de la Cita</th>
@@ -43,7 +43,7 @@
     <!-- Sección para mostrar el detalle de la atención -->
     <div *ngIf="detalleAtencion">
       <h5>Detalle de la Atención:</h5>
-      <p><strong>código:</strong> {{ detalleAtencion.codigo }}</p>
+      <p><strong>Código De Atención:</strong> {{ detalleAtencion.codigo }}</p>
       <p><strong>Fecha de Atención:</strong> {{ detalleAtencion.fechaAtencion }}</p>
       <p><strong>Nombre del Paciente:</strong> {{ detalleAtencion.nombrePaciente }}</p>
       <p><strong>Nombre del Médico:</strong> {{ detalleAtencion.nombreMedico }}</p>
